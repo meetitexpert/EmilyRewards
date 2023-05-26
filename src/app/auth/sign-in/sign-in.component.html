@@ -1,0 +1,18 @@
+<div class="signIn">
+	<h1>Sign In</h1>
+	<form class="commonForm" [formGroup]="signInform">
+		<div class="error-div" *ngIf="userEmail && userEmail.invalid && userEmail.touched">
+			<span class="error-message" >Please enter valid email address.</span>
+		</div>
+		<input formControlName="email" class="formInput" type="email" placeholder="Enter your email"/>
+
+		<div class="error-div" *ngIf="userPassword && userPassword.invalid && userPassword.touched">
+			<span class="error-message" >Password should be contain 8 characters including Number, uppercase,<br/>lowercase letter, spacial character.</span>
+		</div>
+		<input formControlName="password" class="formInput" type="password" placeholder="Enter your password"/>
+		
+		<button class="forgotButton" style="float: right" (click)="forgotPasswordAction()">Forgot Password?</button>
+		<button class="commonButton" (click)="submitForm()" style="margin-top: 40px;" [disabled]="signInform.invalid">Submit</button>
+	</form>
+
+</div>

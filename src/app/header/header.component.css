@@ -1,0 +1,23 @@
+
+.header-view h1 {
+	margin: 5px;
+	flex: auto;
+	padding-left: 10px;
+	font-size: 30px;
+}
+
+.header-view ul {
+	margin: 0px;
+	list-style: none;
+	display: flex;
+	align-items: center;
+}
+
+.header-view ul li {
+	margin-left: 10px;
+}
+a{
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}

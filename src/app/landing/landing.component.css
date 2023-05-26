@@ -1,0 +1,33 @@
+.landing-view{
+	justify-content: center;
+	display: flex;
+	margin-top: 90px;
+}
+.landing-view-content{
+	width: 40%;
+	height: 300px;
+	border: 1px solid gray;
+	text-align: center
+}
+
+.landing-view-content h3{
+	color: black;
+	font-family: 'Roboto-Regular';
+	font-size: 18px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+}
+
+.landing-view-content h5{
+	margin-top: 95px;
+	bottom: 0px;
+}
+
+.landing-view-content h5 a{
+	color: #02b4ec;
+	text-decoration: none;
+	cursor: pointer;
+	bottom: 0px;
+	font-size: 20px;
+}

@@ -1,0 +1,54 @@
+.part1{
+	margin-top: 10px;
+	width: 50%;
+	height: 100%;
+}
+
+.apple-button {
+    background-image: url(../../assets/images/apple.png) !important;
+}
+
+.android-button {
+    background-image: url(../../assets/images/android.png) !important;
+}
+
+.part2{
+	margin: 10px;
+	width: 50%;
+	height: 100%;
+	text-align: right;
+	margin-right: 40px;
+}
+
+.part1 ul, .part2 ul{
+	margin: 0px;
+	list-style: none;
+}
+
+.part1 ul li h1{
+	margin: 0px;
+	font-size: 30px;
+}
+
+.part2 ul li {
+	margin-bottom: 10px;
+}
+
+.part1 ul li button{
+	margin-top: 10px;
+	margin-right: 5px;
+	width: 150px;
+	height: 50px;
+	border-radius: 5px;
+	border: 0px;
+	background-color: #02b4ec;
+	background-size: contain;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.part1 ul li a, .part2 ul li a{
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}

@@ -3,14 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { NotPageFoundComponent } from './not-page-found/not-page-found.component';
+import { LandingComponent } from './landing/landing.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { FooterComponent } from './footer/footer.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    NotPageFoundComponent,
+    LandingComponent,
+    SignInComponent,
+    FooterComponent,
+    SignupComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
