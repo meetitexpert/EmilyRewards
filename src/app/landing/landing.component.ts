@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApisService } from '../services/apis.service';
+import { AppConstants } from '../Constants/app.constants';
+import { Tracking } from '../models/tracking.model';
 
 @Component({
   selector: 'app-landing',
@@ -9,10 +12,23 @@ import { Router } from '@angular/router';
 export class LandingComponent {
   mac = false;
 
-  constructor(private route:Router){}
+  constructor(private route:Router, private apiService:ApisService, private constant:AppConstants){}
 
   ngOnInit(): void {
+    /*
+    GetTrackingId API handling 
+     */
+    this.apiService.post(this.constant.getTrackingId).subscribe((result) => {
+      let res = result as Tracking
+      localStorage.setItem(this.constant.trackingIdVal, res.trackingId ?? "");
+      
+      //GET APP info detail 
+      this.apiService.post(this.constant.getAppInfo).subscribe((result) => {
+        console.warn('GET APP INFO DETAIL : ' + JSON.stringify(result))
+      }) 
+    })
     
+
     var mac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
     if (mac) {
       this.mac=true;

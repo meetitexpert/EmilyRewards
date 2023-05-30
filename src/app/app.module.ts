@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
