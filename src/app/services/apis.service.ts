@@ -16,9 +16,9 @@ export class ApisService {
       .get<any>(url).pipe(catchError(this.handleError));
   }
 
-  post(apiName: string) {
+  post(apiName: string, parameters? :Map<string, any>) {
     let url = this.constants.baseUrl + this.getResources(1) + apiName;
-    let params = this.objToString(this.getParams(apiName))
+    let params = this.objToString(this.getParams(apiName, parameters ?? new Map<string, any>))
     return this.http.post(url, params, {
       headers: this.getHeaders(apiName),
     }).pipe(catchError(this.handleError))
@@ -50,8 +50,8 @@ export class ApisService {
 
   /* API's Params handling */
 
-  getParams(apiName: string) {
-    let paramsDict = new Map<string, any>
+  getParams(apiName: string, params:Map<string, any>) {
+    let paramsDict = params
     paramsDict.set("access_token", this.constants.accessToken);
     switch (apiName) {
       case this.constants.getAppInfo:
@@ -67,6 +67,8 @@ export class ApisService {
         paramsDict.set('device_os_version', '321');
         paramsDict.set('device_model', 'Android');
         paramsDict.set('device_make', '123');
+        break;
+      
         break;
       default:
         break;
@@ -87,23 +89,23 @@ export class ApisService {
   getHeaders(apiName: string) {
 
     let headers = new HttpHeaders()
-    .set('platform', 'Android')
-    .set('make', 'Android')
-    .set('model', 'Android')
-    .set('os_version', '1')
-    .set('serial_number', '123456')
-    .set('app_version', this.constants.appVersion,)
-    .set('Connection', 'keep-alive')
-    .set('Accept-Encoding', 'gzip, deflate')
-    .set('client_class', '1') //Emily Reward : 1, Emily Gift:4
+    // .set('platform', 'Android')
+    // .set('make', 'Android')
+    // .set('model', 'Android')
+    // .set('os_version', '1')
+    // .set('serial_number', '123456')
+    // .set('app_version', this.constants.appVersion,)
+    // .set('Connection', 'keep-alive')
+    // .set('Accept-Encoding', 'gzip, deflate')
+    .set('client_class', '1') //Emily Reward : 1, Emily Gift : 4
     let trackinId = localStorage.getItem(this.constants.trackingIdVal)
     if(trackinId){//if trackingId not empty then add
       headers = headers.set('tracking_id',trackinId ?? "")
     }
     switch (apiName) {
       case this.constants.getAppInfo:
-        headers= headers.set("Content-Type", "application/json");
-        headers= headers.set('Content-length', '207')
+        headers= headers.set("Content-Type", "application/json")
+        // headers= headers.set('Content-length', '207')
         break;
 
       case this.constants.getTrackingId:

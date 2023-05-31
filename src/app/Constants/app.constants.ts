@@ -16,4 +16,5 @@ export class AppConstants {
     /*API's */
     public getAppInfo = "getAppInfo.mvc";
     public getTrackingId = "GetTrackingId";
+    public forgotpasswrod = 'MemberUserForgotPassword';
 }
