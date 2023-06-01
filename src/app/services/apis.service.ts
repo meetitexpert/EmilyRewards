@@ -98,7 +98,7 @@ export class ApisService {
     // .set('Connection', 'keep-alive')
     // .set('Accept-Encoding', 'gzip, deflate')
     .set('client_class', '1') //Emily Reward : 1, Emily Gift : 4
-    let trackinId = localStorage.getItem(this.constants.trackingIdVal)
+    let trackinId = sessionStorage.getItem(this.constants.trackingIdVal)
     if(trackinId){//if trackingId not empty then add
       headers = headers.set('tracking_id',trackinId ?? "")
     }

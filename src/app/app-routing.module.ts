@@ -5,6 +5,8 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { LandingComponent } from './landing/landing.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
+import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { PinValidationComponent } from './auth/pin-validation/pin-validation.component';
 
 const routes: Routes = [
   {
@@ -20,8 +22,16 @@ const routes: Routes = [
     component:SignupComponent
   },
   {
+    path:'pin-validation',
+    component:PinValidationComponent
+  },
+  {
     path:'auth-forgot',
     component:ForgotpasswordComponent
+  },
+  {
+    path:'home-screen',
+    component:HomeScreenComponent
   },
   {
     path:'**',

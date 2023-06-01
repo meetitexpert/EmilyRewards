@@ -12,6 +12,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { PinValidationComponent } from './auth/pin-validation/pin-validation.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import {HttpClientModule} from '@angular/common/http';
     SignInComponent,
     FooterComponent,
     SignupComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    HomeScreenComponent,
+    PinValidationComponent
   ],
   imports: [
     BrowserModule,

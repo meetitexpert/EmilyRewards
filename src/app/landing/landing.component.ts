@@ -20,7 +20,8 @@ export class LandingComponent {
      */
     this.apiService.post(this.constant.getTrackingId).subscribe((result) => {
       let res = result as Tracking
-      localStorage.setItem(this.constant.trackingIdVal, res.trackingId ?? "");
+      // localStorage.setItem(this.constant.trackingIdVal, res.trackingId ?? "");
+      sessionStorage.setItem(this.constant.trackingIdVal, res.trackingId ?? "")
       
       //GET APP info detail 
       this.apiService.post(this.constant.getAppInfo).subscribe((result) => {
