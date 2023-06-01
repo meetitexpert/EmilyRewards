@@ -16,7 +16,8 @@
 .header-view ul li {
 	margin-left: 10px;
 }
-a{
+
+a, .header-view ul li a{
 	color: white;
 	text-decoration: none;
 	cursor: pointer;

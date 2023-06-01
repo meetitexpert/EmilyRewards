@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppConstants } from 'src/app/Constants/app.constants';
 import { SingUp } from 'src/app/models/sing-up.model';
 import { ApisService } from 'src/app/services/apis.service';
@@ -13,7 +14,7 @@ import { Md5 } from 'ts-md5';
 })
 export class SignupComponent {
 
-  constructor(private formBuilder: FormBuilder, private constants: AppConstants, private apiService: ApisService) { }
+  constructor(private formBuilder: FormBuilder, private constants: AppConstants, private apiService: ApisService, private route:Router) { }
 
   signUpform = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -57,8 +58,9 @@ export class SignupComponent {
       if(signUpModel.status != '0'){
         Swal.fire('',signUpModel.details?.description)
       }else{
-        sessionStorage.setItem('',JSON.stringify(signUpModel))
-        Swal.fire('user SingUp successfully')
+        sessionStorage.setItem('user',JSON.stringify(signUpModel))
+        // Swal.fire('user SingUp successfully')
+        this.route.navigate(['pin-validation'])
       }
     })
   }

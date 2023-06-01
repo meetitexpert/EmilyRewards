@@ -40,7 +40,7 @@ export class SignInComponent {
       if(signInModel.status != '0'){
         Swal.fire('',signInModel.details?.description)
       }else{
-        sessionStorage.setItem('',JSON.stringify(signInModel))
+        sessionStorage.setItem('user',JSON.stringify(signInModel))
         // Swal.fire('user loggedin successfully')
         this.route.navigate(['home-screen'])
       }

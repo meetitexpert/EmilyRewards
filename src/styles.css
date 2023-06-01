@@ -33,7 +33,7 @@
 	height: 25%;
 }
 
-.content .signIn, .sign-Up, .forgotpassword{
+.content .signIn, .sign-Up, .forgotpassword, .pinVlaidation, .homescreen{
 	text-align: center;
 	width: 50%;
 	height: 100%;
