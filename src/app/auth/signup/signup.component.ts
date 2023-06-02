@@ -14,7 +14,11 @@ import { Md5 } from 'ts-md5';
 })
 export class SignupComponent {
 
-  constructor(private formBuilder: FormBuilder, private constants: AppConstants, private apiService: ApisService, private route:Router) { }
+  trackinId : string
+    
+  constructor(private formBuilder: FormBuilder, private constants: AppConstants, private apiService: ApisService, private route:Router) {
+    this.trackinId = sessionStorage.getItem(this.constants.trackingIdVal) ?? ""
+   }
 
   signUpform = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -48,20 +52,33 @@ export class SignupComponent {
 
   submitForm() {
     Swal.showLoading()
-    let trackinId = sessionStorage.getItem(this.constants.trackingIdVal)
     let pwd = Md5.hashStr(this.userPassword.value ?? "123")
-    let params = new Map(Object.entries({ "tracking_id": trackinId, "email": this.userEmail.value, "password": pwd, "first_name": this.userFirstName.value, "last_name": this.userLastName.value, "mobile_tel": this.constants.countryCode + this.userPhone.value, "send_type": this.constants.verificationTokenSendType }))
+    let params = new Map(Object.entries({ "tracking_id": this.trackinId, "email": this.userEmail.value, "password": pwd, "first_name": this.userFirstName.value, "last_name": this.userLastName.value, "mobile_tel": this.constants.countryCode + this.userPhone.value, "send_type": this.constants.verificationTokenSendType }))
     this.apiService.post(this.constants.memberSignup, params).subscribe((result) => {
       console.warn(JSON.stringify(result))
-      Swal.hideLoading()
+      
       let signUpModel = result as SingUp
+      signUpModel.email = this.userEmail.value ?? ""
       if(signUpModel.status != '0'){
         Swal.fire('',signUpModel.details?.description)
       }else{
-        sessionStorage.setItem('user',JSON.stringify(signUpModel))
-        // Swal.fire('user SingUp successfully')
-        this.route.navigate(['pin-validation'])
+        this.sendPin(signUpModel)
       }
     })
+  }
+
+  sendPin(model:SingUp){
+    let params = new Map(Object.entries({"tracking_id": this.trackinId, "user_id":"", "email":this.userEmail.value, "mobile_tel":this.userPhone.value, "send_type": this.constants.verificationTokenSendType}))
+    this.apiService.post(this.constants.sendPinMessage, params).subscribe((result)=>{
+      console.warn(JSON.stringify(result))
+      Swal.hideLoading()
+      var signUpModel = result as SingUp
+      if(signUpModel.status != '0'){
+        Swal.fire('',signUpModel.details?.description)
+      }else{
+        sessionStorage.setItem(this.constants.userObject,JSON.stringify(model))    
+        this.route.navigate(['pin-validation'])// Pin validation via EMAIL or SMS
+      }
+    })    
   }
 }

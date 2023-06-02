@@ -20,6 +20,7 @@
 			<span class="error-message" >Password should be contain 8 characters including Number, uppercase,<br/>lowercase letter, spacial character.</span>
 		</div>
 		<input formControlName="password" class="formInput" type="password" placeholder="Enter your password"/>
+
 		<div class="error-div" *ngIf="userPhone && userPhone.invalid && userPhone.touched">
 			<span class="error-message" >Phone number must be at least 10 numbers</span>
 		</div>

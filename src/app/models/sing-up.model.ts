@@ -6,6 +6,7 @@ export class SingUp {
 	last_name?: string
 	verify_status?: string
 	mobile_tel?: string
+	email?: string
 	send_type?: string
 	jwt?: string
 	details?: { "description": "" }

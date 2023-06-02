@@ -21,4 +21,5 @@ a, .header-view ul li a{
 	color: white;
 	text-decoration: none;
 	cursor: pointer;
+	margin-right: 10px;
 }

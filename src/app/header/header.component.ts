@@ -19,7 +19,7 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.route.events.subscribe((val:any)=>{
        if(val.url){
-          this.user = JSON.parse(sessionStorage.getItem('user') ?? "");
+          this.user = JSON.parse(sessionStorage.getItem(this.constatns.userObject) ?? "");
           if(this.user?.jwt) {// user login
             this.userLoggedIn = true  
           }
@@ -37,7 +37,7 @@ export class HeaderComponent {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.userLoggedIn = false
-        sessionStorage.setItem('user','')
+        sessionStorage.setItem(this.constatns.userObject,'')
         this.route.navigate([''])
       }
     })

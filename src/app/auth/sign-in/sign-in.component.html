@@ -9,8 +9,10 @@
 		<div class="error-div" *ngIf="userPassword && userPassword.invalid && userPassword.touched">
 			<span class="error-message" >Password should be contain 8 characters including Number, uppercase,<br/>lowercase letter, spacial character.</span>
 		</div>
-		<input formControlName="password" class="formInput" type="password" placeholder="Enter your password"/>
-		
+		<input #passwordFields formControlName="password" class="formInput" [type]="showPasswordOnPress ? 'text' : 'password'" 
+		placeholder="Enter your password"/>
+		<button class="eyeButton" (click)="showHidePassword()"></button>
+
 		<button class="forgotButton" style="float: right" (click)="forgotPasswordAction()">Forgot Password?</button>
 		<button class="commonButton" (click)="submitForm()" style="margin-top: 40px;" [disabled]="signInform.invalid">Submit</button>
 	</form>

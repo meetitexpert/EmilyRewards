@@ -7,6 +7,7 @@ export class SingIn {
 	verify_status? :string
 	mobile_tel?: string
 	send_type?:string
+	email?: string
 	jwt? : string
 	details? : {"description":""}
 }

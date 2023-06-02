@@ -94,3 +94,19 @@
 	margin: 0px;
 	align-items: start;
 }
+
+.eyeButton {
+	border: 0px;
+	background-color: white;
+	background-image: url(./assets/images/eyeIcon.png) !important;
+	float: right;
+	left: 200px;
+	margin-top: -40px;
+	margin-right: 0px;
+	margin-bottom: 20px;
+	position: relative;
+	z-index: 2;
+	height: 25px;
+	width: 30px;
+	background-size: contain;
+  }

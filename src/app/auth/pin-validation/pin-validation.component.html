@@ -1,6 +1,10 @@
 <div class="pinVlaidation">
 	<h1>Pin Verification</h1>
 	<div>
-
+		<h3>Enter the PIN you received via email</h3>
+		<form class="commonForm" #pinform="ngForm" (submit)="verifyPin(pinform.value)">
+			<input style="font-size: 30px; text-align: center;" name="pinField" class="formInput" type="number" required min="6" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" #pinField='ngModel' ngModel />
+			<button class="commonButton" style="margin-top: 40px;" [disabled]="pinform.invalid">Submit</button>
+		</form>
 	</div>
 </div>

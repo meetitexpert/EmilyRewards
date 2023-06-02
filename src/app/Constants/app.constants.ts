@@ -14,6 +14,7 @@ export class AppConstants {
 
     /*Const Values */
     public trackingIdVal = 'trackingId'
+    public userObject = 'user'
 
 
     /*API's */
@@ -22,4 +23,6 @@ export class AppConstants {
     public forgotpasswrod = 'MemberUserForgotPassword'
     public memberLogin = 'MemberUserLogin'
     public memberSignup = 'MemberUserRegister'
+    public sendPinMessage = 'SendVerifyMessageCode'
+    public verifyPinCode = 'VerifyMessageCode'
 }
