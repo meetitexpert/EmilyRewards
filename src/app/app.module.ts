@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { PinValidationComponent } from './auth/pin-validation/pin-validation.component';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @NgModule({
@@ -34,7 +35,11 @@ import { PinValidationComponent } from './auth/pin-validation/pin-validation.com
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground:true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
