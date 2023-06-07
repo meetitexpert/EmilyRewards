@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Version } from '@angular/core';
 import { AppConstants } from '../Constants/app.constants';
 import { Observable, catchError, throwError, timeout } from 'rxjs';
 
@@ -16,12 +16,22 @@ export class ApisService {
       .get<any>(url).pipe(catchError(this.handleError));
   }
 
-  post(apiName: string, parameters? :Map<string, any>) {
-    let url = this.constants.baseUrl + this.getResources(1) + apiName;
+  post(apiName: string, parameters?: Map<string, any>) {
+    let url = this.constants.baseUrl + this.getResources(this.getApiVersion(apiName)) + apiName;
     let params = this.objToString(this.getParams(apiName, parameters ?? new Map<string, any>))
     return this.http.post(url, params, {
       headers: this.getHeaders(apiName),
     }).pipe(catchError(this.handleError))
+  }
+
+  getApiVersion(apiName: string) {
+    var api_version = 1
+
+    if (apiName == this.constants.getCategories || apiName == this.constants.getRecommentedPromotions) {
+      api_version = 3
+    }
+
+    return api_version
   }
 
   getResources(version: number) {
@@ -50,7 +60,7 @@ export class ApisService {
 
   /* API's Params handling */
 
-  getParams(apiName: string, params:Map<string, any>) {
+  getParams(apiName: string, params: Map<string, any>) {
     let paramsDict = params
     paramsDict.set("access_token", this.constants.accessToken);
     switch (apiName) {
@@ -68,7 +78,7 @@ export class ApisService {
         paramsDict.set('device_model', 'Android');
         paramsDict.set('device_make', '123');
         break;
-      
+
         break;
       default:
         break;
@@ -83,38 +93,41 @@ export class ApisService {
     }
     return str;
   }
-  
+
   /*API's Headers settings */
 
   getHeaders(apiName: string) {
 
     let headers = new HttpHeaders()
-    // .set('platform', 'Android')
-    // .set('make', 'Android')
-    // .set('model', 'Android')
-    // .set('os_version', '1')
-    // .set('serial_number', '123456')
-    // .set('app_version', this.constants.appVersion,)
-    // .set('Connection', 'keep-alive')
-    // .set('Accept-Encoding', 'gzip, deflate')
-    .set('client_class', '1') //Emily Reward : 1, Emily Gift : 4
+      // .set('platform', 'Android')
+      // .set('make', 'Android')
+      // .set('model', 'Android')
+      // .set('os_version', '1')
+      // .set('serial_number', '123456')
+      // .set('app_version', this.constants.appVersion,)
+      // .set('Connection', 'keep-alive')
+      // .set('Accept-Encoding', 'gzip, deflate')
+      .set('client_class', '1') //Emily Reward : 1, Emily Gift : 4
     let trackinId = sessionStorage.getItem(this.constants.trackingIdVal)
-    if(trackinId){//if trackingId not empty then add
-      headers = headers.set('tracking_id',trackinId ?? "")
+    if (trackinId) {//if trackingId not empty then add
+      headers = headers.set('tracking_id', trackinId ?? "")
     }
-    switch (apiName) {
-      case this.constants.getAppInfo:
-        headers= headers.set("Content-Type", "application/json")
-        // headers= headers.set('Content-length', '207')
-        break;
 
-      case this.constants.getTrackingId:
-        headers= headers.set('Content-Type', 'application/x-www-form-urlencoded');
-        break;
-      default:
-        break;
+
+    if (sessionStorage.getItem(this.constants.userObject) && apiName != this.constants.getkeywords) {
+      let user = JSON.parse(sessionStorage.getItem(this.constants.userObject) ?? "")
+      if (user.jwt) {//after login use this header for all API's
+        headers = headers.set("Authorization", "Bearer " + user.jwt)
+      }
     }
-     console.warn(headers)
+
+    if (apiName == this.constants.getAppInfo) {
+      headers = headers.set("Content-Type", "application/json")
+    } else {
+      headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');
+    }
+
+    console.warn(headers)
     return headers
   }
 

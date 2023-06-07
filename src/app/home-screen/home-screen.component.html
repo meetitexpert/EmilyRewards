@@ -1,6 +1,32 @@
 <div class="homescreen">
-	<h1>Home</h1>
-	<div>
-
+	<!-- <h1>Home</h1> -->
+	<div class="categories">
+		<div *ngFor="let image of categories?.returnData" >
+			<img [src]="image.categoryIconUrl" width="80" height="80">
+		</div>
 	</div>
+
+	<h4>Recommended Promotions</h4>
+	<div class="promotions">
+		<div class="card" *ngFor="let promotion of recommendedPromotions?.returnData">
+			<img class="cardImage" [src]="promotion.promotionCustomCard">
+			<div class="cardDetail">
+				<h6 style="color: white;"> {{promotion.shortDescription}}</h6>
+			</div>
+		</div>
+	</div>
+
+	<h4>Favourite Retailer</h4>
+	<div class="favRetailers">
+		<div class="card" *ngFor="let retailer of favouriteRetailers?.offers">
+			<img class="cardImage"  [src]="retailer.offerImageFrontUrl">
+			<div class="cardDetail">
+				<h4 style="color: white;"> {{retailer.partnerName}}</h4>
+				<h6 style="color: white;"> {{retailer.partnerDescription}}</h6>
+			</div>
+			
+		</div>
+		
+	</div>
+
 </div>

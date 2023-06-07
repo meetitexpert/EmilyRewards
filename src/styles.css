@@ -18,8 +18,8 @@
 
 .content{
 	width: 100%;
-	height: 500px;
-	overflow: scroll;
+	height: 475px;
+	overflow-y: scroll;
 	justify-content: center;
 }
 
@@ -33,7 +33,7 @@
 	height: 25%;
 }
 
-.content .signIn, .sign-Up, .forgotpassword, .pinVlaidation, .homescreen{
+.content .signIn, .sign-Up, .forgotpassword, .pinVlaidation{
 	text-align: center;
 	width: 50%;
 	height: 100%;
@@ -110,3 +110,27 @@
 	width: 30px;
 	background-size: contain;
   }
+
+.card{
+	width: 30%;
+	height: 100%;
+	margin-right: 10px;
+}
+
+.card .cardImage{
+	width: 100%;
+	height: 60%;
+	border-radius: 5px;
+}
+
+.card .cardDetail{
+	background-color: #02b4ec; 
+	width: 100%; 
+	height: 40%;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0px;
+	text-align: justify;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}

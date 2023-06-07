@@ -7,6 +7,9 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { PinValidationComponent } from './auth/pin-validation/pin-validation.component';
+import { ProductsScreenComponent } from './appScreens/products-screen/products-screen.component';
+import { MoreScreenComponent } from './appScreens/more-screen/more-screen.component';
+import { WalletScreenComponent } from './appScreens/wallet-screen/wallet-screen.component';
 
 const routes: Routes = [
   {
@@ -32,6 +35,18 @@ const routes: Routes = [
   {
     path:'home-screen',
     component:HomeScreenComponent
+  },
+  {
+    path:'product-screen',
+    component:ProductsScreenComponent
+  },
+  {
+    path:'wallet-screen',
+    component:WalletScreenComponent
+  },
+  {
+    path:'more-screen',
+    component:MoreScreenComponent
   },
   {
     path:'**',

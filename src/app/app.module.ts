@@ -15,6 +15,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { PinValidationComponent } from './auth/pin-validation/pin-validation.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { ProductsScreenComponent } from './appScreens/products-screen/products-screen.component';
+import { WalletScreenComponent } from './appScreens/wallet-screen/wallet-screen.component';
+import { MoreScreenComponent } from './appScreens/more-screen/more-screen.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     SignupComponent,
     ForgotpasswordComponent,
     HomeScreenComponent,
-    PinValidationComponent
+    PinValidationComponent,
+    ProductsScreenComponent,
+    WalletScreenComponent,
+    MoreScreenComponent
   ],
   imports: [
     BrowserModule,

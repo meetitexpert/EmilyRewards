@@ -37,7 +37,7 @@ export class HeaderComponent {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.userLoggedIn = false
-        sessionStorage.setItem(this.constatns.userObject,'')
+        sessionStorage.clear()
         this.route.navigate([''])
       }
     })

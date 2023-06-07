@@ -33,7 +33,7 @@ export class SignInComponent {
   }
 
   submitForm() {
-    
+
     let trackinId = sessionStorage.getItem(this.constants.trackingIdVal)
     let pwd = Md5.hashStr(this.userPassword.value ?? "123")
     this.apiService.post(this.constants.memberLogin, new Map(Object.entries({ 'user_name': this.userEmail.value, 'password': pwd, 'role': "20", 'tracking_id': trackinId }))).subscribe((result) => {
@@ -45,12 +45,31 @@ export class SignInComponent {
       } else {
         sessionStorage.setItem(this.constants.userObject, JSON.stringify(signInModel))
         // Swal.fire('user loggedin successfully')
-        if (signInModel.verify_status != '0') {
-          this.route.navigate(['home-screen'])
-        } else {
-          this.route.navigate(['pin-validation'])
-        }
+        // if (signInModel.verify_status != '0') {
+        //   this.route.navigate(['home-screen'])
+        // } else {
+        //   this.route.navigate(['pin-validation'])
+        // }
+        this.getKeywords(signInModel.verify_status ?? "0")
 
+      }
+    })
+  }
+
+  getKeywords(verify_status: string) {
+    let params = new Map(Object.entries({
+      "lang": "en",
+      "club_code": "101",
+      "apiVersion": "3",
+      "catalogType": this.constants.setCatalogueType(),
+      "sort": "az",
+    }))
+    this.apiService.post(this.constants.getkeywords, params).subscribe((response) => {
+      console.log(JSON.stringify(response))
+      if (verify_status != '0') {
+        this.route.navigate(['home-screen'])
+      } else {
+        this.route.navigate(['pin-validation'])
       }
     })
   }
@@ -68,3 +87,4 @@ export class SignInComponent {
 
   }
 }
+
