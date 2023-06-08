@@ -111,7 +111,7 @@ export class HomeScreenComponent {
       this.favouriteRetailers.offers?.push(retailer1)
 
       var retailer2 = new retailerObj()
-      retailer2.partnerName = "Good Works"
+      retailer2.partnerName = "Barbe Dwyer"
       retailer2.partnerDescription = 'You have earned 20000 points'
       retailer2.offerImageFrontUrl = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/5f91759fea990_template_image_1603368351.webp' 
       this.favouriteRetailers.offers?.push(retailer2)

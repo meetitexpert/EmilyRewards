@@ -11,7 +11,7 @@
 		<div class="card" *ngFor="let promotion of recommendedPromotions?.returnData">
 			<img class="cardImage" [src]="promotion.promotionCustomCard">
 			<div class="cardDetail">
-				<h6 style="color: white;"> {{promotion.shortDescription}}</h6>
+				<h6 style="color: white; max-lines: 3; text-align: center;"> {{promotion.shortDescription}}</h6>
 			</div>
 		</div>
 	</div>
@@ -21,8 +21,8 @@
 		<div class="card" *ngFor="let retailer of favouriteRetailers?.offers">
 			<img class="cardImage"  [src]="retailer.offerImageFrontUrl">
 			<div class="cardDetail">
-				<h4 style="color: white;"> {{retailer.partnerName}}</h4>
-				<h6 style="color: white;"> {{retailer.partnerDescription}}</h6>
+				<h4 style="color: white; margin: 0px;"> {{retailer.partnerName}}</h4>
+				<h6 style="color: white; margin: 0px;"> {{retailer.partnerDescription}}</h6>
 			</div>
 			
 		</div>
