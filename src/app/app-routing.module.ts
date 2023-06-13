@@ -60,7 +60,7 @@ const routes: Routes = [
     component:PromotionsListComponent
   },
   {
-    path:'Journal',
+    path:'more-screen/journal-list',
     component:JournalComponent
   },
   {

@@ -1,17 +1,26 @@
 
-.userDetail{
-	margin-top: 25px;
-	margin-bottom: 20px;
+.more{
+	text-align: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	padding-left: 80px;
+	padding-right: 80px;
 }
 
-.userDetail img{
-	width: 100px;
-	height: 100px;
+.userDetail{
+	margin: 20px;
+}
+
+h1{
+	padding-bottom: 10px;
 }
 
 ul{
+	margin: 0;
 	text-decoration: none;
 	list-style: none;
+	padding-bottom: 20px;
 }
 
 li{
@@ -21,12 +30,13 @@ li{
 	height: 40px;
 	position: relative;
     padding-left: 11px;
-    margin:0 0 3px 0;
+    margin:0 0 5px 0;
 	display: flex;
     flex-direction: row;
     align-items: center;
 	color: black;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 a{

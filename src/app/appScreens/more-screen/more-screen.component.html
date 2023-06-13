@@ -1,15 +1,14 @@
 <div class="more">
 	<div class="userDetail">
-		<qrcode [qrdata]="'myAngularxQrCode'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-		<h1>Bilal Hussain</h1>
+		<qrcode [qrdata]="'myAngularxQrCode'" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+		<h1>{{this.user?.first_name}} {{this.user?.last_name}}</h1>
 	</div>
 	<ul>
-		<li> <a routerLink="['Journal']">Journal</a> </li>
-		<li> <a >Notification</a> </li>
-		<li> <a >Contact Us</a> </li>
+		<li> <a routerLink="journal-list">Journal</a> </li>
+		<li> <a (click)="contactUs()">Contact Us</a> </li>
 		<li> <a (click)="goToLink(this.constants.termsUrl)">Terms and Conditions</a> </li>
 		<li> <a (click)="goToLink(this.constants.privacyUrl)">Privacy policy</a> </li>
 		<li> <a (click)="goToLink(this.constants.faqUrl)">FAQ</a> </li>
-		<li> <a >About</a> </li>
+		<li> <a  (click)="aboutApp()">About</a> </li>
 	</ul>
 </div>

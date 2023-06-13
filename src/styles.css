@@ -33,7 +33,7 @@
 	height: 25%;
 }
 
-.content .signIn, .sign-Up, .forgotpassword, .pinVlaidation, .more{
+.content .signIn, .sign-Up, .forgotpassword, .pinVlaidation{
 	text-align: center;
 	width: 50%;
 	height: 100%;
