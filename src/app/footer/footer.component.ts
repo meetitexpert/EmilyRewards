@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AppComponent } from '../app.component';
+import { AppConstants } from '../Constants/app.constants';
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
+
+  constructor(public constants:AppConstants){}
+
   goToLink(url: string){
     window.open(url, "_blank");
   }

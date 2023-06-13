@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppConstants } from 'src/app/Constants/app.constants';
 
 @Component({
   selector: 'app-more-screen',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./more-screen.component.css']
 })
 export class MoreScreenComponent {
+
+  
+  constructor(public constants:AppConstants){}
+
+  goToLink(url: string){
+    window.open(url, "_blank");
+  }
 
 }

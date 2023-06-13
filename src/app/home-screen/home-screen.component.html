@@ -1,14 +1,14 @@
 <div class="homescreen">
 	<!-- <h1>Home</h1> -->
 	<div class="categories">
-		<div *ngFor="let image of categories?.returnData" >
-			<img [src]="image.categoryIconUrl" width="80" height="80">
+		<div *ngFor="let category of categories?.returnData" >
+			<img [src]="category.categoryIconUrl" width="80" height="80" (click)="searchPromotionsWithCategory(category)">
 		</div>
 	</div>
 
 	<h4>Recommended Promotions</h4>
 	<div class="promotions">
-		<div class="card" *ngFor="let promotion of recommendedPromotions?.returnData">
+		<div class="card" *ngFor="let promotion of recommendedPromotions?.returnData"  (click)="openProductAndList(promotion)">
 			<img class="cardImage" [src]="promotion.promotionCustomCard">
 			<div class="cardDetail">
 				<h6 style="color: white; max-lines: 3; text-align: center;"> {{promotion.shortDescription}}</h6>
@@ -18,7 +18,7 @@
 
 	<h4>Favourite Retailer</h4>
 	<div class="favRetailers">
-		<div class="card" *ngFor="let retailer of favouriteRetailers?.offers">
+		<div class="card" *ngFor="let retailer of favouriteRetailers?.offers" (click)="openRetailerPromotionList(retailer)">
 			<img class="cardImage"  [src]="retailer.offerImageFrontUrl">
 			<div class="cardDetail">
 				<h4 style="color: white; margin: 0px;"> {{retailer.partnerName}}</h4>

@@ -112,9 +112,17 @@
   }
 
 .card{
-	width: 30%;
-	height: 100%;
+	@media (max-width: 300px ) {
+		/* your code */
+		width: 40%;
+	}
+	@media (min-width: 740px) {
+		/* your code */
+		width: 30%;
+	}
+	
 	margin-right: 10px;
+	height: 100%;
 }
 
 .card .cardImage{

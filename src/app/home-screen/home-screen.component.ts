@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { AppConstants } from '../Constants/app.constants';
 import { ApisService } from '../services/apis.service';
 import { SingIn } from '../models/sing-in.model';
-import { Categories } from '../models/categories.model';
+import { Categories, catObj } from '../models/categories.model';
 import { Retailer, retailerObj } from '../models/retailer.model';
 import { Promotion, promotionObj } from '../models/promotion.model';
+import { Router } from '@angular/router';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-home-screen',
@@ -20,7 +22,7 @@ export class HomeScreenComponent {
   recommendedPromotions? : Promotion
   favouriteRetailers?  : Retailer
 
-  constructor(private constatns:AppConstants,  private apiService:ApisService){
+  constructor(private constatns:AppConstants,  private apiService:ApisService, private router:Router){
     this.user =  JSON.parse(sessionStorage.getItem(this.constatns.userObject) ?? "")
     this.trackinId  = sessionStorage.getItem(this.constatns.trackingIdVal) ?? ""
   }
@@ -114,6 +116,19 @@ export class HomeScreenComponent {
       retailer2.offerImageFrontUrl = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/5f91759fea990_template_image_1603368351.webp' 
       this.favouriteRetailers.offers?.push(retailer2)
     })
+  }
+
+  /*ACTIONS*/
+  searchPromotionsWithCategory(category:catObj){
+    this.router.navigate(['promotions-list',{category:JSON.stringify(category)}])
+  }
+
+  openRetailerPromotionList(retObj : retailerObj){
+    this.router.navigate(['promotions-list', {retailer:JSON.stringify(retObj)}])
+  }
+
+  openProductAndList(promotion:promotionObj){
+    this.router.navigate(['product-list'])
   }
 
 }

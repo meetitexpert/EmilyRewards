@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotPageFoundComponent } from './not-page-found/not-page-found.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
@@ -10,6 +10,9 @@ import { PinValidationComponent } from './auth/pin-validation/pin-validation.com
 import { ProductsScreenComponent } from './appScreens/products-screen/products-screen.component';
 import { MoreScreenComponent } from './appScreens/more-screen/more-screen.component';
 import { WalletScreenComponent } from './appScreens/wallet-screen/wallet-screen.component';
+import { ProductListScreenComponent } from './appScreens/product-list-screen/product-list-screen.component';
+import { PromotionsListComponent } from './appScreens/promotions-list/promotions-list.component';
+import { JournalComponent } from './appScreens/more-screen/more-sections/journal/journal.component';
 
 const routes: Routes = [
   {
@@ -47,6 +50,18 @@ const routes: Routes = [
   {
     path:'more-screen',
     component:MoreScreenComponent
+  },
+  {
+    path:'product-list',
+    component:ProductListScreenComponent
+  },
+  {
+    path:'promotions-list',
+    component:PromotionsListComponent
+  },
+  {
+    path:'Journal',
+    component:JournalComponent
   },
   {
     path:'**',

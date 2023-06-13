@@ -18,6 +18,9 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ProductsScreenComponent } from './appScreens/products-screen/products-screen.component';
 import { WalletScreenComponent } from './appScreens/wallet-screen/wallet-screen.component';
 import { MoreScreenComponent } from './appScreens/more-screen/more-screen.component';
+import { ProductListScreenComponent } from './appScreens/product-list-screen/product-list-screen.component';
+import { PromotionsListComponent } from './appScreens/promotions-list/promotions-list.component';
+import { JournalComponent } from './more-screen/more-sections/journal/journal.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { MoreScreenComponent } from './appScreens/more-screen/more-screen.compon
     PinValidationComponent,
     ProductsScreenComponent,
     WalletScreenComponent,
-    MoreScreenComponent
+    MoreScreenComponent,
+    ProductListScreenComponent,
+    PromotionsListComponent,
+    JournalComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,7 @@ import { MoreScreenComponent } from './appScreens/more-screen/more-screen.compon
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true,
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
