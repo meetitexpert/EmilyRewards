@@ -8,8 +8,12 @@ import { AppConstants } from 'src/app/Constants/app.constants';
 })
 export class MoreScreenComponent {
 
+  public myAngularxQrCode: string;
   
-  constructor(public constants:AppConstants){}
+  
+  constructor(public constants:AppConstants){
+    this.myAngularxQrCode = 'https://emilyrewards.com';
+  }
 
   goToLink(url: string){
     window.open(url, "_blank");

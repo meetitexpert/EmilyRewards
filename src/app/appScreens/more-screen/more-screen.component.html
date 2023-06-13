@@ -1,11 +1,15 @@
-<div>
+<div class="more">
+	<div class="userDetail">
+		<qrcode [qrdata]="'myAngularxQrCode'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+		<h1>Bilal Hussain</h1>
+	</div>
 	<ul>
-		<li> <a routerlink="['Journal']">Journal</a> </li>
+		<li> <a routerLink="['Journal']">Journal</a> </li>
 		<li> <a >Notification</a> </li>
 		<li> <a >Contact Us</a> </li>
 		<li> <a (click)="goToLink(this.constants.termsUrl)">Terms and Conditions</a> </li>
 		<li> <a (click)="goToLink(this.constants.privacyUrl)">Privacy policy</a> </li>
 		<li> <a (click)="goToLink(this.constants.faqUrl)">FAQ</a> </li>
-		<li> <a >Aboutus</a> </li>
+		<li> <a >About</a> </li>
 	</ul>
 </div>

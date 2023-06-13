@@ -20,7 +20,8 @@ import { WalletScreenComponent } from './appScreens/wallet-screen/wallet-screen.
 import { MoreScreenComponent } from './appScreens/more-screen/more-screen.component';
 import { ProductListScreenComponent } from './appScreens/product-list-screen/product-list-screen.component';
 import { PromotionsListComponent } from './appScreens/promotions-list/promotions-list.component';
-import { JournalComponent } from './more-screen/more-sections/journal/journal.component';
+import { JournalComponent } from './appScreens/more-screen/more-sections/journal/journal.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { JournalComponent } from './more-screen/more-sections/journal/journal.co
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true,
     }),
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
