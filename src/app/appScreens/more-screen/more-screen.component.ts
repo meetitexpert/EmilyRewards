@@ -22,9 +22,6 @@ export class MoreScreenComponent {
     window.open(url, "_blank");
   }
 
-  contactUs(){
-    document.location  = "mailto:pyong@envisionmobile.com?subject=User Feedback on EMILY App&body=message%20goes%20here";
-  }
 
   aboutApp(){
     Swal.fire({

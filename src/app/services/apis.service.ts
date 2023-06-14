@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Version } from '@angular/core';
 import { AppConstants } from '../Constants/app.constants';
-import { Observable, catchError, throwError, timeout } from 'rxjs';
+import { Observable, catchError, map, throwError, timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApisService {
-
+  private mailApi = 'https://mailthis.to/bhussain@envisionmobile.com'
   constructor(private http: HttpClient, private constants: AppConstants) { }
 
   get(apiName: string) {
@@ -24,10 +24,15 @@ export class ApisService {
     }).pipe(catchError(this.handleError))
   }
 
+  PostMessage(input: any) {
+    return this.http.post(this.mailApi, input, { responseType: 'text' }).pipe(catchError(this.handleError))
+  }
+
+
   getApiVersion(apiName: string) {
     var api_version = 1
 
-    if (apiName == this.constants.getCategories || apiName == this.constants.getRecommentedPromotions) {
+    if (apiName == this.constants.getCategories || apiName == this.constants.getRecommentedPromotions || apiName == this.constants.getJournalData) {
       api_version = 3
     }
 

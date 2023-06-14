@@ -13,6 +13,7 @@ import { WalletScreenComponent } from './appScreens/wallet-screen/wallet-screen.
 import { ProductListScreenComponent } from './appScreens/product-list-screen/product-list-screen.component';
 import { PromotionsListComponent } from './appScreens/promotions-list/promotions-list.component';
 import { JournalComponent } from './appScreens/more-screen/more-sections/journal/journal.component';
+import { ContactUsComponent } from './appScreens/more-screen/more-sections/contact-us/contact-us.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path:'more-screen/journal-list',
     component:JournalComponent
+  },
+  {
+    path:'more-screen/contact-us',
+    component:ContactUsComponent
   },
   {
     path:'**',

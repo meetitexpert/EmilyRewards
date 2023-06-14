@@ -1,1 +1,28 @@
-<p>journal works!</p>
+<div class="journal-screen">
+	<div class="jounral-card" *ngFor="let order of journalData?.returnData?.datas">
+		<div class="retailer-detail">
+			<img class="retailer-image" [src]="order.partnerImage">
+			<div class="retailer-information">
+				<h4> {{order.partnerName}}</h4>
+				<h6> {{order.shortAddress}}</h6>
+			</div>
+		</div>
+		<div class="seprator"></div>
+		<div class="order-detail">
+			<img class="order-image" [src]="order.catalogs?.[0]?.catalogImageUrl">
+			<div class="order-information">
+				<h6>{{order.catalogs?.[0]?.catalogName}}</h6>
+				<a *ngif="order.catalogs?.length > 1">{{order.catalogs?.length}} items</a>
+				<p style="margin-top: 20px;">{{order.transactionDateTime}}</p>
+			</div>
+			<div class="order-actions">
+				<p>{{setOrderStatus(order)}}</p>
+				
+				<button>View more</button>
+			</div>
+		</div>
+		<div class="reward">
+			<h4 style="margin-top: 20px;">{{showReward(order)}}</h4>
+		</div>
+	</div>
+</div>

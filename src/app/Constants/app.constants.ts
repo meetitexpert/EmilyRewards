@@ -35,6 +35,7 @@ export class AppConstants {
     public getCategories = 'getCategoryList.mvc'
     public getRecommentedPromotions = 'getPromotionIds.mvc'
     public getFavouriteRetailer = 'SearchMembershipFavourites'
+    public getJournalData = 'getTransactionList.mvc'
 
 
     setCatalogueType() {

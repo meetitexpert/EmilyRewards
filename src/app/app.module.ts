@@ -22,6 +22,7 @@ import { ProductListScreenComponent } from './appScreens/product-list-screen/pro
 import { PromotionsListComponent } from './appScreens/promotions-list/promotions-list.component';
 import { JournalComponent } from './appScreens/more-screen/more-sections/journal/journal.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ContactUsComponent } from './appScreens/more-screen/more-sections/contact-us/contact-us.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     MoreScreenComponent,
     ProductListScreenComponent,
     PromotionsListComponent,
-    JournalComponent
+    JournalComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
