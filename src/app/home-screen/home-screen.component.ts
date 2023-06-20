@@ -78,8 +78,8 @@ export class HomeScreenComponent {
       "clientClass":"1",
       "appId":this.constatns.appId,
       "catalogType":this.constatns.catalogType.join(','),
-      "latitude":"43.6666713",
-      "longitude":"-79.3157392",
+      "latitude":this.constatns.latitude,
+      "longitude":this.constatns.longitude,
       "radius":"25",
       "trackingId":this.trackinId,
       "showAllLocations":"1"

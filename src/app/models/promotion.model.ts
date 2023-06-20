@@ -4,6 +4,14 @@ export class Promotion {
 	returnData? : [promotionObj]
 }
 
+export class PromotionOffers{
+    status?: number
+	message?: string
+    server_timestamp? : string
+    page? : 0
+    offers? : [promotionObj]
+}
+
 export class promotionObj{
 	promotionId : number = 0
     cbType : string = ""

@@ -49,12 +49,6 @@ export class JournalComponent {
 
   }
 
-  createRange(number: number) {
-    // return new Array(number);
-    return new Array(number).fill(0)
-      .map((n, index) => index + 1);
-  }
-
   setOrderStatus(order:journalObj){
     let status = ''
     let orderType = order.expressData?.expressType as string

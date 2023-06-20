@@ -18,12 +18,14 @@ export class HeaderComponent {
 
   ngOnInit(): void {
     this.route.events.subscribe((val:any)=>{
-       if(val.url){
-          this.user = JSON.parse(sessionStorage.getItem(this.constatns.userObject) ?? "");
-          if(this.user?.jwt) {// user login
-            this.userLoggedIn = true  
-          }
-       }
+      if(val.url){
+        if(sessionStorage.getItem(this.constatns.userObject)){
+         this.user = JSON.parse(sessionStorage.getItem(this.constatns.userObject) ?? "");
+         if(this.user?.jwt) {// user login
+           this.userLoggedIn = true  
+         } 
+        }
+      }
     })
   }
 

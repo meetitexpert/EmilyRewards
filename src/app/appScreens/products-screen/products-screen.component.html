@@ -1,1 +1,14 @@
-<p>products-screen works!</p>
+<div class="container" style="padding-bottom: 10px;" *ngFor="let x of constants.createRange(totalNumberOfRows); index as rowNo;">
+	<div class="row row-cols-3 g-3" >
+		<div class="card h-100" *ngFor="let promotion of createPromotionsSetof3(rowNo)">
+			<img [src]="promotion.promotionCustomCard" class="card-img-top"
+				alt="" />
+			<div class="card-body">
+				<h5 class="card-title">{{promotion.partnerName}}</h5>
+				<p class="card-text">
+					{{promotion.shortDescription}}
+				</p>
+			</div> 
+		</div>
+	</div>
+</div>

@@ -21,6 +21,8 @@ export class AppConstants {
     /*Const Values */
     public trackingIdVal = 'trackingId'
     public userObject = 'user'
+    public latitude =  "43.6666713"
+    public longitude = '-79.3157392'
 
 
     /*API's */
@@ -34,12 +36,22 @@ export class AppConstants {
     public getkeywords = 'GetOfferKeywords?'
     public getCategories = 'getCategoryList.mvc'
     public getRecommentedPromotions = 'getPromotionIds.mvc'
+    public searchOffersAPi = 'SearchOffers?'
     public getFavouriteRetailer = 'SearchMembershipFavourites'
     public getJournalData = 'getTransactionList.mvc'
+
+    ////////////Colors////////
+    public primaryColor = 0xFF02b4ec;
 
 
     setCatalogueType() {
         var catalogType = [1, 2, 3]
         return catalogType
     }
+
+    public createRange(number: number) {
+        // return new Array(number);
+        return new Array(number).fill(0)
+          .map((n, index) => index + 1);
+      }
 }
