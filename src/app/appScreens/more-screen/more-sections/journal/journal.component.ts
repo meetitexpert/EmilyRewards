@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppConstants } from 'src/app/Constants/app.constants';
 import { Journal, journalObj } from 'src/app/models/journal.model';
 import { SingIn } from 'src/app/models/sing-in.model';
@@ -15,7 +16,7 @@ export class JournalComponent {
   trackingId? : string
   journalData? : Journal
 
-  constructor(private constants: AppConstants, private apiService: ApisService) { 
+  constructor(private constants: AppConstants, private apiService: ApisService, private router:Router) { 
     this.user = JSON.parse(sessionStorage.getItem(constants.userObject) ?? "")
     this.trackingId = sessionStorage.getItem(constants.trackingIdVal) as string
   }
@@ -45,8 +46,8 @@ export class JournalComponent {
     })
   }
 
-  openOrderDetail(order: {}) {
-
+  openOrderDetail(order: journalObj) {
+    this.router.navigate(['more-screen','journal-list','order-detail'])
   }
 
   setOrderStatus(order:journalObj){

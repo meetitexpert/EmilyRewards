@@ -3,13 +3,13 @@
 
 @font-face {
 	font-family: 'Poppins';
-	src: url(assets/fonts/Poppins-Regular.ttf) format("opentype");
+	src: url(assets/fonts/Poppins-Regular.ttf) format("truetype");
 }
 
 .main-div {
 	margin-left: 10px;
 	margin-right: 10px;
-	font-family: 'Roboto';
+	font-family: 'Poppins';
 	flex-direction: column;
 }
 

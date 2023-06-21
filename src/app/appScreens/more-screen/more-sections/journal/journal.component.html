@@ -16,9 +16,9 @@
 				<p style="margin-top: 20px;">{{order.transactionDateTime}}</p>
 			</div>
 			<div class="order-actions">
-				<p>{{setOrderStatus(order)}}</p>
+				<p style="padding-bottom: 25px;">{{setOrderStatus(order)}}</p>
 				
-				<button>View more</button>
+				<a (click)="openOrderDetail(order)">View more</a>
 			</div>
 		</div>
 		<div class="reward">
@@ -26,3 +26,4 @@
 		</div>
 	</div>
 </div>
+<router-outlet></router-outlet>
