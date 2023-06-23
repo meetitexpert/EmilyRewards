@@ -7,13 +7,14 @@
 }
 
 .main-div {
-	margin-left: 10px;
-	margin-right: 10px;
+	/* margin-left: 10px;
+	margin-right: 10px; */
 	font-family: 'Poppins';
+	font-size: 14px;
 	flex-direction: column;
 }
 
-.header-view{
+.header-view {
 	margin-top: 0px;
 	background-color: #02b4ec;
 	display: flex;
@@ -21,30 +22,35 @@
 	height: 10%;
 }
 
-.content{
+.content {
 	width: 100%;
-	height: 475px;
+	height: 525px;
 	overflow-y: scroll;
 	justify-content: center;
 }
 
-.footer{
+.footer {
+	border-top: 1px solid #c7c7c7;
 	position: fixed;
-    bottom: 0;
-	background-color: #02b4ec;
-	display: flex;
-	width: 98.4%;
+	bottom: 0;
+	background-color: #f4f4f4;
+	width: 100%;
 	margin: 0px;
-	height: 25%;
+	/* height: 15%; */
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.content .signIn, .sign-Up, .forgotpassword, .pinVlaidation{
+.content .signIn,
+.sign-Up,
+.forgotpassword,
+.pinVlaidation {
 	text-align: center;
 	width: 50%;
 	height: 100%;
 	position: absolute;
-  	left: 25%;
-  	margin: 0 0 0 -20;
+	left: 25%;
+	margin: 0 0 0 -20;
 }
 
 .commonButton {
@@ -53,16 +59,15 @@
 	width: 50%;
 	height: 40px;
 	color: white;
-	font-family: 'Roboto-Medium';
 	margin-top: 18%;
-	font-size: 18px;
+	font-size: 16px;
 	border: 0px;
 	border-radius: 5px;
 }
 
-.commonButton:disabled{
+.commonButton:disabled {
 	list-style: none;
-	background-color:lightgray;
+	background-color: lightgray;
 	width: 50%;
 	height: 40px;
 	color: black;
@@ -73,7 +78,7 @@
 	border-radius: 5px;
 }
 
-.commonForm{
+.commonForm {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -81,19 +86,20 @@
 	margin: 10px;
 }
 
-.formInput{
+.formInput {
 	width: 80%;
 	height: 40px;
 	margin-bottom: 10px;
 	padding-left: 5px;
 	border: 1px solid #dedede;
+	border-radius: 5px;
 }
 
-.error-div{
+.error-div {
 	text-align: left;
 }
 
-.error-message{
+.error-message {
 	color: red;
 	font-size: 14px;
 	margin: 0px;
@@ -114,22 +120,22 @@
 	height: 25px;
 	width: 30px;
 	background-size: contain;
-  }
+}
 
-.card{
+.card {
 	/* @media (max-width: 475px ) { */
 
-		/* width: 40%; */
+	/* width: 40%; */
 	/* } */
 	/* @media (min-width: 740px) { */
-		width: 30%;
+	width: 30%;
 	/* } */
 	margin-right: 10px;
 	height: 100%;
 	border: none;
 }
 
-.card .cardImage{
+.card .cardImage {
 	width: 100%;
 	height: 65%;
 	border: none;
@@ -138,9 +144,9 @@
 
 }
 
-.card .cardDetail{
-	background-color: #02b4ec; 
-	width: 100%; 
+.card .cardDetail {
+	background-color: #02b4ec;
+	width: 100%;
 	height: 35%;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -150,9 +156,11 @@
 	border: none;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
+	color: white;
+	max-lines: 3;
 }
 
-.card-body{
+.card-body {
 	background-color: #02b4ec;
 	color: white;
 	border: none;

@@ -74,7 +74,10 @@ export class SignupComponent {
       Swal.hideLoading()
       var signUpModel = result as SingUp
       if(signUpModel.status != '0'){
-        Swal.fire('',signUpModel.details?.description)
+        Swal.fire({
+          title:signUpModel.details?.description,
+          cancelButtonColor : '#02b4ec',
+        })
       }else{
         sessionStorage.setItem(this.constants.userObject,JSON.stringify(model))    
         this.route.navigate(['pin-validation'])// Pin validation via EMAIL or SMS

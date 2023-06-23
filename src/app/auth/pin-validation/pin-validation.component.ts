@@ -24,7 +24,11 @@ export class PinValidationComponent {
       let response  =  result as SingUp
 
       if (response.status != "0"){
-        Swal.fire('',response.details?.description)
+        Swal.fire({
+          title:response.details?.description,
+          cancelButtonColor : '#02b4ec',
+        })
+        
       }else{
          user.jwt = response.jwt
          sessionStorage.setItem(this.constant.userObject, JSON.stringify(user))

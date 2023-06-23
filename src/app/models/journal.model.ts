@@ -56,4 +56,19 @@ export class journalObj {
 	cashDiscountPercentage?: string
 	transactionTotalAmount? : string 
 	giftCardsAppliedValue ?: string
+	orderNo? : String
+    orderItemsTotalPrice? : String
+    ordertotalBeforeTax? : String
+    orderTotalTax? : String
+    orderTotalPrice? : String
+    orderReferenceNo? : String
+    orderReceiptNo? : String
+    orderRdeemValue?  : String
+    creditApplied? : String
+    paymentCardNo? : String
+    paymentCardName? : String
+    couponAppliedValue? : String
+    couponCode? : String
+    appliedCouponsArray? : []
+	payByCardORCash? : string
 }

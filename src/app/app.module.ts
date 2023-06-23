@@ -23,7 +23,7 @@ import { PromotionsListComponent } from './appScreens/promotions-list/promotions
 import { JournalComponent } from './appScreens/more-screen/more-sections/journal/journal.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ContactUsComponent } from './appScreens/more-screen/more-sections/contact-us/contact-us.component';
-import { OrderDetailComponent } from './appScreens/more-screen/more-sections/journal/order-detail/order-detail.component';
+import { OrderDetailComponent } from './appScreens/more-screen/more-sections/order-detail/order-detail.component';
 
 
 @NgModule({

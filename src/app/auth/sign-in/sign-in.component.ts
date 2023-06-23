@@ -41,7 +41,10 @@ export class SignInComponent {
       let signInModel = result as SingIn
       signInModel.email = this.userEmail.value ?? ""
       if (signInModel.status != '0') {
-        Swal.fire('', signInModel.details?.description)
+        Swal.fire({
+          title:signInModel.details?.description,
+          cancelButtonColor : '#02b4ec',
+        })
       } else {
         sessionStorage.setItem(this.constants.userObject, JSON.stringify(signInModel))
         // Swal.fire('user loggedin successfully')

@@ -14,7 +14,8 @@ import { ProductListScreenComponent } from './appScreens/product-list-screen/pro
 import { PromotionsListComponent } from './appScreens/promotions-list/promotions-list.component';
 import { JournalComponent } from './appScreens/more-screen/more-sections/journal/journal.component';
 import { ContactUsComponent } from './appScreens/more-screen/more-sections/contact-us/contact-us.component';
-import { OrderDetailComponent } from './appScreens/more-screen/more-sections/journal/order-detail/order-detail.component';
+import { OrderDetailComponent } from './appScreens/more-screen/more-sections/order-detail/order-detail.component';
+
 
 const routes: Routes = [
   {
@@ -63,17 +64,11 @@ const routes: Routes = [
   },
   {
     path:'more-screen/journal-list',
-    component:JournalComponent,
-    children:[
-      {
-        path:'order-detail',
-        component:OrderDetailComponent 
-      },
-      {
-        path: '**',
-        redirectTo: 'order-detail'
-      }
-    ]
+    component:JournalComponent
+  },
+  {
+    path:'more-screen/order-detail',
+    component:OrderDetailComponent,
   },
   {
     path:'more-screen/contact-us',

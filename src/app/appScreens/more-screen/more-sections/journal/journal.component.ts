@@ -47,7 +47,7 @@ export class JournalComponent {
   }
 
   openOrderDetail(order: journalObj) {
-    this.router.navigate(['more-screen','journal-list','order-detail'])
+    this.router.navigate(['more-screen','order-detail',{"orderDetal":JSON.stringify(order)}])
   }
 
   setOrderStatus(order:journalObj){

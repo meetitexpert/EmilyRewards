@@ -2,10 +2,10 @@
 	<div class="row row-cols-3 g-3" >
 		<div class="card h-100" *ngFor="let promotion of createPromotionsSetof3(rowNo)">
 			<img [src]="promotion.promotionCustomCard" class="card-img-top"
-				alt="" />
+				alt=""  style="height:130px;"/>
 			<div class="card-body">
-				<h5 class="card-title">{{promotion.partnerName}}</h5>
-				<p class="card-text">
+				<h6 class="card-title">{{promotion.partnerName}}</h6>
+				<p class="card-text" style="display: -webkit-box;  -webkit-line-clamp: 3;  -webkit-box-orient: vertical; overflow: hidden;">
 					{{promotion.shortDescription}}
 				</p>
 			</div> 

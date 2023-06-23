@@ -1,0 +1,167 @@
+<div class="container">
+
+	<h1>Order Receipt</h1>
+	<table>
+		<tbody>
+			<tr>
+				<td class="heading">
+					{{'Order date:'}}
+				</td>
+				<td class="values">
+					{{orderDetail?.transactionDateTime}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Order #:'}}
+				</td>
+				<td class="values">
+					{{orderDetail?.transactionNumber}}
+				</td>
+			</tr>
+			<tr *ngIf="orderDetail?.payNo">
+				<td class="heading">
+					{{'Payment Ref. #:'}}
+				</td>
+				<td class="values">
+					{{orderDetail?.payNo}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Receipt:'}}
+				</td>
+				<td class="values">
+					{{orderDetail?.serverUUID}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Points Earned:'}}
+				</td>
+				<td class="values">
+					{{orderDetail?.transactionRewardValue}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Points Redeemed:'}}
+				</td>
+				<td class="values">
+					{{orderDetail?.redeemQuantity ?? "0"}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Credits Applied:'}}
+				</td>
+				<td class="values">
+					{{"$"+orderDetail?.creditAppliedAmount}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="catalogDetail" *ngFor="let catalog of orderDetail?.catalogs">
+		<img class="catImage" [src]='catalog["catalogImageUrl"]'>
+		<div class="catInfo">
+			<h5>{{catalog["catalogName"]}}</h5>
+			<h6>{{"Quantity: "+catalog["purchaseQuantity"]}}</h6>
+			<h6>{{"Amount: $"+catalog["totalAmount"]}}</h6>
+		</div>
+	</div>
+
+	<table style="width: 100%;">
+		<tbody>
+			<tr>
+				<td class="heading">
+					{{'items:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.orderItemsTotalPrice}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Shipping Fee:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.standardShippingCost}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Free Shipping:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.freeShippingAmount}}
+				</td>
+			</tr>
+			<tr *ngIf="orderDetail?.payNo">
+				<td class="heading">
+					{{'Coupon Applied:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.couponAppliedAmount}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Total Before Tax:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.transactionAmountExclusiveTax}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Taxes:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.transactionTaxAmount}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Gratuity:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.gratuity}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Credits Applied:'}}
+				</td>
+				<td class="payment_values">
+					{{"-$"+orderDetail?.creditAppliedAmount}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Gift Cards Applied:'}}
+				</td>
+				<td class="payment_values">
+					{{"-$"+orderDetail?.giftCardsAppliedValue}}
+				</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					{{'Order Total:'}}
+				</td>
+				<td class="payment_values">
+					{{"$"+orderDetail?.transactionTotalAmount}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="payType">
+		<p class="heading" style="padding-top: 5px; height: 100%; padding-bottom: 5px;">{{orderDetail?.payByCardORCash}}</p>
+		<p class="payment_values" style="height: 100%; padding-top: 5px; padding-bottom: 5px;">{{"$"+orderDetail?.transactionTotalAmount}}</p>
+	</div>
+
+	<div class="address">
+		<p>{{"Address:      "+orderDetail?.shortAddress}}</p>
+	</div>
+
+</div>

@@ -19,12 +19,15 @@ export class ForgotpasswordComponent {
     this.apiService.post(this.contants.forgotpasswrod, new Map(Object.entries({'email':data.email}))).subscribe((result) =>{
       let forgotModel = result as Forgotpassword
       if(forgotModel.status != 0){
-        Swal.fire('',forgotModel.details?.description)
+        Swal.fire({
+          title:forgotModel.details?.description,
+          cancelButtonColor : '#02b4ec',
+        })
       }else{
-        Swal.fire(
-          '',
-          'The instructions on how to reset your password is sent to your email account.',
-          )
+          Swal.fire({
+            title:'The instructions on how to reset your password is sent to your email account.',
+            cancelButtonColor : '#02b4ec',
+          })
       }
     })
   }

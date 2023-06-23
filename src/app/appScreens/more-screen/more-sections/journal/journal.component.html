@@ -12,7 +12,7 @@
 			<img class="order-image" [src]="order.catalogs?.[0]?.catalogImageUrl">
 			<div class="order-information">
 				<h6>{{order.catalogs?.[0]?.catalogName}}</h6>
-				<a *ngif="order.catalogs?.length > 1">{{order.catalogs?.length}} items</a>
+				<a *ngIf="order.catalogs?.length">{{order.catalogs?.length}} items</a>
 				<p style="margin-top: 20px;">{{order.transactionDateTime}}</p>
 			</div>
 			<div class="order-actions">
@@ -26,4 +26,3 @@
 		</div>
 	</div>
 </div>
-<router-outlet></router-outlet>
