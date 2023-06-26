@@ -1,4 +1,4 @@
-<div class="container" style="padding-bottom: 10px; border: 1px solid red;" *ngFor="let x of constants.createRange(totalNumberOfRows); index as rowNo;">
+<!-- <div class="container" style="padding-bottom: 10px; border: 1px solid red;" *ngFor="let x of constants.createRange(totalNumberOfRows); index as rowNo;">
 	<div class="row row-cols-3 g-3" >
 		<div class="card h-100" *ngFor="let promotion of createPromotionsSetof3(rowNo)">
 			<img [src]="promotion.promotionCustomCard" class="card-img-top"
@@ -11,4 +11,20 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
+
+<div class="container" style="padding-bottom: 10px; padding-top: 10px;" >
+	<div class="row">
+	  <div class="col-sm-4" style="padding-bottom: 10px;" *ngFor="let promotion of promotion?.offers">
+		<div class="card h-100" >
+			<img [src]="promotion.promotionCustomCard" class="card-img-top"/>
+			<div class="card-body">
+				<h6 class="card-title">{{promotion.partnerName}}</h6>
+				<p class="card-text" style="display: -webkit-box;  -webkit-line-clamp: 3;  -webkit-box-orient: vertical; overflow: hidden;">
+					{{promotion.shortDescription}}
+				</p>
+			</div> 
+		</div>
+	  </div>
+	</div>
+  </div>
