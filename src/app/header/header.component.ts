@@ -31,7 +31,7 @@ export class HeaderComponent {
 
   signOutAction(){
     Swal.fire({
-      title : 'Are you sure you want to Sign Out?',
+      text : 'Are you sure you want to Sign Out?',
       showCancelButton: true,
       confirmButtonText: 'Sign Out',
       confirmButtonColor: '#02b4ec'

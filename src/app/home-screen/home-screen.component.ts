@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AppConstants } from '../Constants/app.constants';
 import { ApisService } from '../services/apis.service';
 import { SingIn } from '../models/sing-in.model';
@@ -15,7 +15,6 @@ import { state } from '@angular/animations';
 })
 export class HomeScreenComponent {
 
-  
   categories? : Categories
   user : SingIn //user Object
   trackinId? : string
@@ -39,7 +38,7 @@ export class HomeScreenComponent {
     promotion2.promotionCustomCard = 'https://chriscolotti.us/wp-content/uploads/2021/02/promotional-analysis.jpg'
     promotion2.shortDescription = 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
     
-    let promotionsArray = [promotion1, promotion2]
+    let promotionsArray = [promotion1, promotion2, promotion1, promotion2, promotion1]
 
     this.recommendedPromotions.returnData = promotionsArray as [promotionObj]
 
@@ -114,6 +113,7 @@ export class HomeScreenComponent {
       retailer2.partnerName = "Barbe Dwyer"
       retailer2.partnerDescription = 'You have earned 20000 points'
       retailer2.offerImageFrontUrl = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/5f91759fea990_template_image_1603368351.webp' 
+      this.favouriteRetailers.offers?.push(retailer2)
       this.favouriteRetailers.offers?.push(retailer2)
     })
   }

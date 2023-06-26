@@ -25,8 +25,10 @@ export class MoreScreenComponent {
 
   aboutApp(){
     Swal.fire({
-      title:'App Version : 1.0.0',
-      cancelButtonColor : '#02b4ec',
+      text:'App Version : 1.0.0',
+      confirmButtonColor : '#02b4ec',
+      confirmButtonText : "Close",
+      
     })
   }
 

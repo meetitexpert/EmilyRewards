@@ -9,7 +9,7 @@
 		<div class="error-div" *ngIf="userPassword && userPassword.invalid && userPassword.touched">
 			<span class="error-message" >Password should be contain 8 characters including Number, uppercase,<br/>lowercase letter, spacial character.</span>
 		</div>
-		<input #passwordFields formControlName="password" class="formInput" [type]="showPasswordOnPress ? 'text' : 'password'" 
+		<input maxlength="40" #passwordFields formControlName="password" class="formInput" [type]="showPasswordOnPress ? 'text' : 'password'" 
 		placeholder="Enter your password"/>
 		<button class="eyeButton" (click)="showHidePassword()"></button>
 

@@ -19,13 +19,13 @@
 		<div class="error-div" *ngIf="userPassword && userPassword.invalid && userPassword.touched">
 			<span class="error-message" >Password should be contain 8 characters including Number, uppercase,<br/>lowercase letter, spacial character.</span>
 		</div>
-		<input formControlName="password" class="formInput" type="password" placeholder="Enter your password"/>
+		<input maxlength="40" formControlName="password" class="formInput" type="password" placeholder="Enter your password"/>
 
 		<div class="error-div" *ngIf="userPhone && userPhone.invalid && userPhone.touched">
 			<span class="error-message" >Phone number must be at least 10 numbers</span>
 		</div>
 		
-		<input formControlName="phoneNo" class="formInput" type="number" placeholder="Enter your phone number"/>
+		<input maxlength="10" formControlName="phoneNo" class="formInput" type="number" placeholder="Enter your phone number"/>
 		
 		<button class="commonButton" (click)="submitForm()" style="margin-top: 20px;" [disabled]="signUpform.invalid">Submit</button>
 	</form>
