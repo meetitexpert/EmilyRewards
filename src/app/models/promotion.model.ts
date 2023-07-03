@@ -34,7 +34,7 @@ export class promotionObj{
     favourite_status : string = ""
     cashBackDiscountValue : string = ""
     offerId : string = ""
-    partnerDescription : string = ""
+    partnerDescription : string | undefined = ""
     partnerId : string = ""
     partnerImage : string = ""
     partnerName : string = ""
