@@ -1,0 +1,55 @@
+<div class="container">
+	<!-- Retailer Information -->
+	<div class="row" style="text-align: center;">
+		<h1>Munday Body Care</h1>
+	</div>
+	<div class="row">
+		<div class="col" style="padding-bottom: 10px;">
+			<div> Unit H5, 1070 Major Mackenzie Drive East, Richmond Hill</div>
+		</div>
+		<div class="col" style="padding-bottom: 10px; text-align: right;">
+			<div> 11245.00km away</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col" style="padding-bottom: 10px;">
+			<div> Store opens on Thursday at 5:00 AM</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col" style="padding-bottom: 10px;">
+			<div
+				style="width: 200px; background-color: red; border: 1px solid white; border-radius: 20px; text-align: center; color: white;">
+				Store is closed</div>
+		</div>
+	</div>
+	<!-- Products Listing -->
+	<div class="row">
+		<div class="col-6 col-md-6 col-lg-3" style="padding-bottom: 10px;" *ngFor="let product of productsList">
+			<div class="card h-100" style="align-items: center;">
+				<img src={{this.url}} class="card-img-top" style="width: 100px; height: 100px; margin: 10px;" />
+				<div class="card-body">
+					<h6 class="card-title">{{'Product 1'}}</h6>
+					<p class="card-text">
+						{{"Product description Product description Product description"}}
+					</p>
+					<button>
+						Show more
+					</button>
+					<div class="priceing">
+						<div class="actualPrice">$10.10</div>
+						<div class="seprator"></div>
+						<div class="discountPrice">$5.00</div>
+						<div class="percentage">
+							50%</div>
+					</div>
+					<div class="quantity">
+						<button class="btn-qty">+</button>
+						<p class="txt-qty">1</p>
+						<button class="btn-qty">-</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

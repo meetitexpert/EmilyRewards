@@ -1,0 +1,103 @@
+.col{
+	padding-bottom: 10px;
+}
+
+.card {
+	background-color: #f4f4f4;
+	border: 0px;
+}
+
+.card-body {
+	/* border: 1px solid red; */
+	background-color: #f4f4f4;
+	color: #1d1d1d;
+	padding: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	width: 100%;
+}
+
+.card-title{
+	font-weight:700;
+
+}
+
+.card-text {
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	margin: 0px;
+}
+
+button {
+	border: 0px;
+	background-color: white;
+	border-radius: 10px;
+	margin-top: 10px;
+	color: #02b4ec;
+}
+
+.priceing {
+	height: 20px;
+	margin-top: 10px;
+	display: flex;
+}
+
+.priceing .actualPrice {
+	
+	text-align: center;
+	background-color: white;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	text-decoration: line-through;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.priceing .seprator {
+	width: 1px;
+	height: 90%;
+	background-color: #ececec;
+}
+
+.priceing .discountPrice {
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	background-color: white;
+}
+
+.priceing .percentage {
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: red;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	text-align: center;
+	color: white;
+}
+
+.quantity {
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+}
+.btn-qty{
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	background-color: white;
+	border-radius: 50%;
+	margin: 0px;
+}
+.txt-qty{
+	height: 100%;
+	margin: 0px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+
+}

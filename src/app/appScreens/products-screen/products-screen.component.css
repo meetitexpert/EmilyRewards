@@ -1,0 +1,19 @@
+.container {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.col-sm-3, .col-md-6, .col-lg-4{
+	padding-bottom: 10px;
+}
+
+.card{
+	border: 0px;
+}
+
+.card-text {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
