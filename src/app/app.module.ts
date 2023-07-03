@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotpasswordComponent } from './auth/forgotpassword/forgotpassword.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { PinValidationComponent } from './auth/pin-validation/pin-validation.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
@@ -24,7 +24,7 @@ import { JournalComponent } from './appScreens/more-screen/more-sections/journal
 import { QRCodeModule } from 'angularx-qrcode';
 import { ContactUsComponent } from './appScreens/more-screen/more-sections/contact-us/contact-us.component';
 import { OrderDetailComponent } from './appScreens/more-screen/more-sections/order-detail/order-detail.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { OrderDetailComponent } from './appScreens/more-screen/more-sections/ord
     PromotionsListComponent,
     JournalComponent,
     ContactUsComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +57,9 @@ import { OrderDetailComponent } from './appScreens/more-screen/more-sections/ord
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true,
     }),
-    QRCodeModule
+    QRCodeModule,
+    NgbModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

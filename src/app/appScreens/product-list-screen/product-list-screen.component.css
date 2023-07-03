@@ -99,5 +99,23 @@ button {
 	padding-left: 10px;
 	padding-right: 10px;
 	text-align: center;
-
 }
+
+.collapse {
+	&:not(.show) {
+	  display: none;
+	}
+  }
+  
+  .collapsing {
+	height: 0;
+	overflow: hidden;
+	@include transition($transition-collapse);
+  }
+
+  .btn-Direction, .btn-call{
+	background-color: #02b4ec;
+	color: white;
+	width: 100%;
+	height: 30px;
+  }

@@ -52,4 +52,32 @@
 			</div>
 		</div>
 	</div>
+	<div ngbAccordion [closeOthers]="true" style="padding-bottom: 50px;">
+		<div ngbAccordionItem *ngFor="let title of promotionDetailTitlesArray; let i = index"  style="border: 0px;">
+			<div ngbAccordion #accordion="ngbAccordion">
+				<div ngbAccordionItem="first" style="border: 0px; background-color: #f4f4f4;">
+					<h2 ngbAccordionHeader>
+						<button ngbAccordionButton style="background-color: #f4f4f4; color:#1d1d1d ; font-weight: 700;">{{title}}</button>
+					</h2>
+					<div ngbAccordionCollapse style="background-color: #f4f4f4;">
+						<div ngbAccordionBody>
+							<ng-template>
+								<!-- Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+								officia aute, non cupidatat skateboard dolor brunch.  -->
+								{{promotionDescriptionsArray[i]}}
+								<div class="row" *ngIf="title == 'Location'">
+									<div class="col"> 
+										<button class="btn-Direction"> Get Direction </button>
+									</div>
+									<div class="col">
+										<button class="btn-call"> Call Now </button>
+									</div>
+								</div>
+							</ng-template>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
