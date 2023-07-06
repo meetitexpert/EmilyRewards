@@ -24,7 +24,8 @@ import { JournalComponent } from './appScreens/more-screen/more-sections/journal
 import { QRCodeModule } from 'angularx-qrcode';
 import { ContactUsComponent } from './appScreens/more-screen/more-sections/contact-us/contact-us.component';
 import { OrderDetailComponent } from './appScreens/more-screen/more-sections/order-detail/order-detail.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductDetailScreenComponent } from './appScreens/product-detail-screen/product-detail-screen.component'
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     JournalComponent,
     ContactUsComponent,
     OrderDetailComponent,
+    ProductDetailScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     }),
     QRCodeModule,
     NgbModule,
+    NgbCarouselModule
 
   ],
   providers: [],

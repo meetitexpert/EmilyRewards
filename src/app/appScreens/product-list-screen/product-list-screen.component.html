@@ -27,13 +27,13 @@
 	<div class="row">
 		<div class="col-6 col-md-6 col-lg-3" style="padding-bottom: 10px;" *ngFor="let product of productsList">
 			<div class="card h-100" style="align-items: center;">
-				<img src={{this.url}} class="card-img-top" style="width: 100px; height: 100px; margin: 10px;" />
+				<img src={{product.images[0]}} class="card-img-top" style="width: 100px; height: 100px; margin: 10px;" />
 				<div class="card-body">
-					<h6 class="card-title">{{'Product 1'}}</h6>
+					<h6 class="card-title">{{product.productName}}</h6>
 					<p class="card-text">
-						{{"Product description Product description Product description"}}
+						{{product.descriptionField}}
 					</p>
-					<button>
+					<button (click)="btn_show_more(product)">
 						Show more
 					</button>
 					<div class="priceing">
@@ -44,15 +44,15 @@
 							50%</div>
 					</div>
 					<div class="quantity">
-						<button class="btn-qty">+</button>
-						<p class="txt-qty">1</p>
-						<button class="btn-qty">-</button>
+						<button class="btn-qty" (click)="btn_subtractQty_Action(product)">-</button>
+						<p class="txt-qty">{{product.offerQuantity}}</p>
+						<button class="btn-qty" (click)="btn_addQty_Action(product)">+</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div ngbAccordion [closeOthers]="true" style="padding-bottom: 50px;">
+	<div ngbAccordion [closeOthers]="true" style="padding-bottom: 10px;">
 		<div ngbAccordionItem *ngFor="let title of promotionDetailTitlesArray; let i = index"  style="border: 0px;">
 			<div ngbAccordion #accordion="ngbAccordion">
 				<div ngbAccordionItem="first" style="border: 0px; background-color: #f4f4f4;">
@@ -67,10 +67,10 @@
 								{{promotionDescriptionsArray[i]}}
 								<div class="row" *ngIf="title == 'Location'">
 									<div class="col"> 
-										<button class="btn-Direction"> Get Direction </button>
+										<button class="btn-Direction" (click)="btn_direction_Action()"> Get Direction </button>
 									</div>
 									<div class="col">
-										<button class="btn-call"> Call Now </button>
+										<button class="btn-call" (click)="btn_call_Action()"> Call Now </button>
 									</div>
 								</div>
 							</ng-template>
@@ -79,5 +79,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="checkout">
+		<button class="btn_checkout">Checkout</button>
 	</div>
 </div>

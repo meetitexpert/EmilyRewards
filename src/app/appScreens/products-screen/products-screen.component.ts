@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppConstants } from 'src/app/Constants/app.constants';
 import { PromotionOffers, promotionObj } from 'src/app/models/promotion.model';
 import { SingIn } from 'src/app/models/sing-in.model';
@@ -15,7 +16,7 @@ export class ProductsScreenComponent {
   totalList = 0
   user?: SingIn //user Object
 
-  constructor(public constants: AppConstants, private apiService: ApisService) {
+  constructor(public constants: AppConstants, private apiService: ApisService, private router:Router) {
     this.user = JSON.parse(sessionStorage.getItem(this.constants.userObject) ?? "")
    
   }
@@ -29,7 +30,7 @@ export class ProductsScreenComponent {
       "tracking_id": sessionStorage.getItem(this.constants.trackingIdVal),
       "lang": "en",
       "club_code": "101",
-      "sort": "nm",
+      "sort": "az",
       "type": "instore",
       "version": "6.3",
       "keyword": '',
@@ -40,6 +41,7 @@ export class ProductsScreenComponent {
       "show_all_locations": "1",
       "latitude": this.constants.latitude,
       "longitude": this.constants.longitude,
+      "radius": "25",
       "catalogType": this.constants.setCatalogueType()
     }))
 
@@ -87,5 +89,9 @@ export class ProductsScreenComponent {
     }
 
     return listOfPromotions
+  }
+
+  openProductAndList(promotion:promotionObj){
+    this.router.navigate(['product-list'])
   }
 }

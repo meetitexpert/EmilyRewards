@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AppConstants } from 'src/app/Constants/app.constants';
 import { catObj } from 'src/app/models/categories.model';
 import { Promotion, PromotionOffers, promotionObj } from 'src/app/models/promotion.model';
@@ -21,7 +21,7 @@ export class PromotionsListComponent {
   category?: catObj
   user?: SingIn //user Object
 
-  constructor(private activateRoute: ActivatedRoute, public constants: AppConstants, private apiService: ApisService) {
+  constructor(private activateRoute: ActivatedRoute, public constants: AppConstants, private apiService: ApisService, private router:Router) {
     this.user = JSON.parse(sessionStorage.getItem(this.constants.userObject) ?? "")
     if (this.activateRoute.snapshot.params['retailer']) {
       this.retailer = JSON.parse(this.activateRoute.snapshot.params['retailer']) as retailerObj
@@ -50,6 +50,7 @@ export class PromotionsListComponent {
       "show_all_locations": "1",
       "latitude": this.constants.latitude,
       "longitude": this.constants.longitude,
+      "radius": "25",
       "catalogType": this.constants.setCatalogueType()
     }))
 
@@ -102,5 +103,9 @@ export class PromotionsListComponent {
     }
 
     return listOfPromotions
+  }
+
+  openProductAndList(promotion:promotionObj){
+    this.router.navigate(['product-list'])
   }
 }

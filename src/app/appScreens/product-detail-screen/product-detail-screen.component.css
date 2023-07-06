@@ -1,0 +1,105 @@
+.container{
+	text-align: center;
+	width: 100%;
+	height: 100%;
+}
+
+h1{
+	margin-top: 20px;
+}
+
+.row, h2{
+	text-align: left;
+}
+
+.priceing {
+	height: 20px;
+	margin-top: 10px;
+	display: flex;
+}
+
+.priceing .actualPrice {
+	
+	text-align: center;
+	background-color: #ececec;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	text-decoration: line-through;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.priceing .seprator {
+	width: 1px;
+	height: 90%;
+	background-color: white;
+}
+
+.priceing .discountPrice {
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	background-color: #ececec;
+}
+
+.priceing .percentage {
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: red;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	text-align: center;
+	color: white;
+}
+
+.quantity {
+	margin-top: 10px;
+	display: flex;
+	justify-content: left;
+}
+.btn-qty{
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	background-color: #ececec;
+	border-radius: 50%;
+	border: 0px;
+	margin-top: 0px;
+	color: #02b4ec;
+}
+.txt-qty{
+	height: 100%;
+	margin: 0px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+}
+
+.attributes{
+	/* border: 1px solid red; */
+	padding-top: 20px;
+	width: 100%;
+	padding-left: 0px;
+	padding-bottom: 10px;
+}
+
+.attributes-section{
+	/* border: 1px solid red; */
+	width: 100%;
+	height: 20px;
+	display: flex;
+	overflow-x: scroll;
+	text-align: center;
+}
+
+.attributeVal{
+	/* border: 1px solid red; */
+	background-color: #ececec;
+	border-radius: 20px;
+	margin: 0px;
+	margin-right: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	/* min-width: 60px; */
+ }

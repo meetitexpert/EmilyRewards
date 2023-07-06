@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 	  <div class="col-sm-3 col-md-6 col-lg-4" *ngFor="let promotion of promotion?.offers">
-		<div class="card h-100" >
+		<div class="card h-100" (click)="openProductAndList(promotion)">
 			<img [src]="promotion.promotionCustomCard" class="card-img-top"/>
 			<div class="card-body">
 				<h6 class="card-title">{{promotion.partnerName}}</h6>

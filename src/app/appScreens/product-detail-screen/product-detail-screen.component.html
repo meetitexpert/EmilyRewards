@@ -1,0 +1,44 @@
+<div class="container">
+	<h1 style="padding-bottom: 30px;">Product Detail</h1>
+	<div class="row">
+		<div class="col-6">
+			<ngb-carousel #carousel [interval]="1000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
+				(slide)="onSlide($event)">
+				<ng-template ngbSlide *ngFor="let img of product?.images; index as i">
+					<div class="picsum-img-wrapper">
+						<img [src]="img" alt="Product image {{i + 1}} description" width="100%" height="70%" />
+					</div>
+				</ng-template>
+			</ngb-carousel>
+		</div>
+		<div class="col-6">
+			<h2 class="card-title">{{product?.productName}}</h2>
+			<p class="card-text">
+				{{product?.descriptionField}}
+			</p>
+			<div class="priceing">
+				<div class="actualPrice">$10.10</div>
+				<div class="seprator"></div>
+				<div class="discountPrice">$5.00</div>
+				<div class="percentage">
+					50%</div>
+			</div>
+			<div class="quantity">
+				<button class="btn-qty" (click)="btn_subtractQty_Action()">-</button>
+				<p class="txt-qty">{{product?.offerQuantity}}</p>
+				<button class="btn-qty" (click)="btn_addQty_Action()">+</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- attributes -->
+	<div style="padding-bottom: 50px;">
+		<div class="attributes" *ngFor="let attrib of product?.attributes;">
+			<h2>{{attrib.name}}:</h2>
+			<div class="attributes-section" >
+				<div class="attributeVal" *ngFor="let attrVal of attrib.values;"> {{attrVal}} </div>
+			</div>
+		</div>
+	</div>
+	
+</div>

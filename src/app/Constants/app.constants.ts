@@ -39,6 +39,7 @@ export class AppConstants {
     public searchOffersAPi = 'SearchOffers?'
     public getFavouriteRetailer = 'SearchMembershipFavourites'
     public getJournalData = 'getTransactionList.mvc'
+    public getProducstsList = 'getProductList.mvc'
 
     ////////////Colors////////
     public primaryColor = 0xFF02b4ec;

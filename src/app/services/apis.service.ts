@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Version } from '@angular/core';
 import { AppConstants } from '../Constants/app.constants';
 import { Observable, catchError, map, throwError, timeout } from 'rxjs';
+import { isFormArray } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class ApisService {
   getApiVersion(apiName: string) {
     var api_version = 1
 
-    if (apiName == this.constants.getCategories || apiName == this.constants.getRecommentedPromotions || apiName == this.constants.getJournalData) {
+    if (apiName == this.constants.getCategories || apiName == this.constants.getRecommentedPromotions || apiName == this.constants.getProducstsList || apiName == this.constants.getJournalData ) {
       api_version = 3
     }
 

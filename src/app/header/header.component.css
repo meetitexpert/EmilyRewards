@@ -14,6 +14,9 @@
 }
 
 .header-view ul li {
+	@media (max-width:992px) {
+		margin-left: 0px;
+	}
 	margin-left: 10px;
 }
 
