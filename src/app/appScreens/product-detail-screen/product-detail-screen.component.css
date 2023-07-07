@@ -10,6 +10,18 @@ h1{
 
 .row, h2{
 	text-align: left;
+	/* border: 1px solid red; */
+	
+}
+
+.card-title{
+	@media (max-width:992px) {
+		margin-top: 10px;
+	}
+	
+	margin-top: -7px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .priceing {
@@ -53,9 +65,10 @@ h1{
 }
 
 .quantity {
-	margin-top: 10px;
+	margin-top: 30px;
 	display: flex;
 	justify-content: left;
+
 }
 .btn-qty{
 	width: 30px;
@@ -70,10 +83,10 @@ h1{
 .txt-qty{
 	height: 100%;
 	margin: 0px;
-	padding: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
 	text-align: center;
+	font-size: 20px;
 }
 
 .attributes{
@@ -93,6 +106,10 @@ h1{
 	text-align: center;
 }
 
+.attributeName{
+	font-size: 20px;
+	font-weight: bold;
+}
 .attributeVal{
 	/* border: 1px solid red; */
 	background-color: #ececec;

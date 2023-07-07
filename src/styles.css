@@ -7,10 +7,10 @@
 }
 
 @font-face {
-    font-family: "Poppins";
-    src: url(assets/fonts/Poppins-Medium.ttf) format("truetype");
-    font-weight: 700;
-    font-style: normal;
+	font-family: "Poppins";
+	src: url(assets/fonts/Poppins-Medium.ttf) format("truetype");
+	font-weight: 700;
+	font-style: normal;
 }
 
 html,
@@ -34,19 +34,14 @@ body {
 	background-color: #02b4ec;
 	display: flex;
 	width: 100%;
-	/* height: 10%; */
 }
 
 .content {
-	@media (max-width: 992px) {
-		width: 100%;
-		height: 700px;
-	}
-
 	width: 100%;
-	height: 525px;
+	height: 100vh;
 	overflow-y: scroll;
 	justify-content: center;
+	margin-bottom: 150px;
 }
 
 .footer {
@@ -56,7 +51,6 @@ body {
 	background-color: #f4f4f4;
 	width: 100%;
 	margin: 0px;
-	/* height: 15%; */
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -82,7 +76,8 @@ body {
 .signIn h1,
 .sign-Up h1,
 .forgotpassword h1,
-.pinVlaidation h1, .container h1 {
+.pinVlaidation h1,
+.container h1 {
 	/* border: 1px solid red; */
 	margin-top: 40px;
 	flex: auto;
@@ -150,20 +145,27 @@ body {
 	align-items: start;
 }
 
-
-/* @media (max-width: 768px){
+@media (min-width:897px) and (max-width:992px) {
 	.eyeButton {
-		left: 250px;
+		left: 125px;
 	}
 }
 
-.eyeButton {
-	@media (min-width: 769px) and (max-width: 1024px) {
-		left: 300px;
+@media (min-width:414px) and (max-width:896px) {
+	.eyeButton {
+		left: 70px;
 	}
-} */
+}
+
+@media (max-width:1024px) {
+	.eyeButton {
+		left: 270px;
+	}
+}
+
 
 .eyeButton {
+
 	border: 0px;
 	background-color: white;
 	background-image: url(./assets/images/eyeIcon.png) !important;
@@ -217,6 +219,7 @@ body {
 }
 
 .card-body {
+	padding: 10px;
 	background-color: #02b4ec;
 	color: white;
 	border: none;

@@ -1,11 +1,21 @@
 
 
 .forgotButton{
+	@media (max-width:992px) {
+		margin-left:48%;
+		border: 1px solid red;
+	}
+
+	@media (max-width:1024px) {
+		margin-left:65%;
+		border: 1px solid yellow;
+	}
+
+	border: 1px solid blue;
 	margin-left: 60%;
 	color: #02b4ec;
 	font-style: italic;
 	font-size: 14px;
-	border: 0px;
 	background-color: white;
 }
 

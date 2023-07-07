@@ -1,33 +1,17 @@
 <div class="container">
 	<!-- Retailer Information -->
-	<div class="row" style="text-align: center;">
+	<div class="row" style="text-align: center; justify-content:center;">
 		<h1>Munday Body Care</h1>
-	</div>
-	<div class="row">
-		<div class="col" style="padding-bottom: 10px;">
-			<div> Unit H5, 1070 Major Mackenzie Drive East, Richmond Hill</div>
-		</div>
-		<div class="col" style="padding-bottom: 10px; text-align: right;">
-			<div> 11245.00km away</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col" style="padding-bottom: 10px;">
-			<div> Store opens on Thursday at 5:00 AM</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col" style="padding-bottom: 10px;">
-			<div
-				style="width: 200px; background-color: red; border: 1px solid white; border-radius: 20px; text-align: center; color: white;">
-				Store is closed</div>
-		</div>
+		<div class="address"> Unit H5, 1070 Major Mackenzie Drive East, Richmond Hill</div>
+		<div class="distance"> 11245.00km away</div>
+		<div class="storeTime"> Store opens on Thursday at 5:00 AM</div>
+		<div class="storeopenclose" style="width: 200px; background-color: red; border-radius: 20px; text-align: center; color: white;">Store is closed</div>
 	</div>
 	<!-- Products Listing -->
 	<div class="row">
-		<div class="col-6 col-md-6 col-lg-3" style="padding-bottom: 10px;" *ngFor="let product of productsList">
+		<div class="col-6 col-md-6 col-lg-3" style="padding-bottom: 25px;" *ngFor="let product of productsList">
 			<div class="card h-100" style="align-items: center;">
-				<img src={{product.images[0]}} class="card-img-top" style="width: 100px; height: 100px; margin: 10px;" />
+				<img src={{product.images[0]}} class="card-img-top" style="width: 100px; height: 100px; margin: 30px;" />
 				<div class="card-body">
 					<h6 class="card-title">{{product.productName}}</h6>
 					<p class="card-text">

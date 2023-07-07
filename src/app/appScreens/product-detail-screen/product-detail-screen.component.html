@@ -1,7 +1,7 @@
 <div class="container">
 	<h1 style="padding-bottom: 30px;">Product Detail</h1>
 	<div class="row">
-		<div class="col-6">
+		<div class="col-12 col-lg-6">
 			<ngb-carousel #carousel [interval]="1000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
 				(slide)="onSlide($event)">
 				<ng-template ngbSlide *ngFor="let img of product?.images; index as i">
@@ -11,7 +11,7 @@
 				</ng-template>
 			</ngb-carousel>
 		</div>
-		<div class="col-6">
+		<div class="col-12 col-lg-6">
 			<h2 class="card-title">{{product?.productName}}</h2>
 			<p class="card-text">
 				{{product?.descriptionField}}
@@ -34,7 +34,7 @@
 	<!-- attributes -->
 	<div style="padding-bottom: 50px;">
 		<div class="attributes" *ngFor="let attrib of product?.attributes;">
-			<h2>{{attrib.name}}:</h2>
+			<h2 class="attributeName">{{attrib.name}}:</h2>
 			<div class="attributes-section" >
 				<div class="attributeVal" *ngFor="let attrVal of attrib.values;"> {{attrVal}} </div>
 			</div>

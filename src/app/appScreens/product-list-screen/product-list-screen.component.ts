@@ -40,7 +40,7 @@ export class ProductListScreenComponent {
 
     product.attributes = [atrb, atrb2]
 
-    let productArray = [product, product, product, product]
+    let productArray = [product, product, product, product, product, product, product, product]
     this.productsList = productArray
     
     this.promotionDescriptionsArray.push(this.promotion?.longDescription ?? "N/A", this.promotion?.promotionRewardsTC ?? "N/A", this.promotion?.redeemTC ?? "N/A", this.promotion?.couponTC ?? "N/A", this.promotion?.address ?? "N/A")
