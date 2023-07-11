@@ -165,7 +165,6 @@ body {
 
 
 .eyeButton {
-
 	border: 0px;
 	background-color: white;
 	background-image: url(./assets/images/eyeIcon.png) !important;
@@ -182,12 +181,13 @@ body {
 }
 
 .promotionCard {
-	@media (max-width: 992px) {
-		min-width: 50%;
-		border: 0px solid blue;
+	@media (max-width:992px) {
+		min-width: 100%;
+		/* border: 0px solid blue; */
 	}
 
-	min-width: 30%;
+	/* border: 1px solid blueviolet; */
+	width: 35%;
 	margin-right: 10px;
 	min-height: 100%;
 	border: none;

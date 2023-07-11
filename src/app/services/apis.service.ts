@@ -33,7 +33,7 @@ export class ApisService {
   getApiVersion(apiName: string) {
     var api_version = 1
 
-    if (apiName == this.constants.getCategories || apiName == this.constants.getRecommentedPromotions || apiName == this.constants.getProducstsList || apiName == this.constants.getJournalData ) {
+    if (apiName == this.constants.getCategories || apiName == this.constants.getRecommentedPromotions || apiName == this.constants.getProducstsList || apiName == this.constants.getProductDetail || apiName == this.constants.getJournalData ) {
       api_version = 3
     }
 

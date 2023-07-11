@@ -7,6 +7,7 @@ import { Retailer, retailerObj } from '../models/retailer.model';
 import { Promotion, promotionObj } from '../models/promotion.model';
 import { Router } from '@angular/router';
 import { state } from '@angular/animations';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-home-screen',
@@ -38,7 +39,7 @@ export class HomeScreenComponent {
     promotion2.promotionCustomCard = 'https://chriscolotti.us/wp-content/uploads/2021/02/promotional-analysis.jpg'
     promotion2.shortDescription = 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
     
-    let promotionsArray = [promotion1, promotion2, promotion1, promotion2, promotion1]
+    let promotionsArray = [promotion1, promotion2]
 
     this.recommendedPromotions.returnData = promotionsArray as [promotionObj]
 
@@ -76,7 +77,7 @@ export class HomeScreenComponent {
       "count":"5",
       "clientClass":"1",
       "appId":this.constatns.appId,
-      "catalogType":this.constatns.catalogType.join(','),
+      "catalogType": this.constatns.catalogType.join(','),
       "latitude":this.constatns.latitude,
       "longitude":this.constatns.longitude,
       "radius":"25",
@@ -98,25 +99,37 @@ export class HomeScreenComponent {
       "apiVersion":"3",
       "favouriteType":"2",
       "appId":this.constatns.appId,
-      "catalogType":this.constatns.catalogType
+      "catalogType":this.constatns.setCatalogueType()
     }))
     this.apiService.post(this.constatns.getFavouriteRetailer, params).subscribe((response)=>{
       console.warn(JSON.stringify(response))
       this.favouriteRetailers = response as Retailer
-      var retailer1 = new retailerObj()
-      retailer1.partnerName = "Arieta Benson"
-      retailer1.offerImageFrontUrl = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/5f91753f5ebfb_template_image_1603368255.webp'
-      retailer1.partnerDescription = 'Buy 1 get 1 free'
-      this.favouriteRetailers.offers?.push(retailer1)
-
-      var retailer2 = new retailerObj()
-      retailer2.partnerName = "Barbe Dwyer"
-      retailer2.partnerDescription = 'You have earned 20000 points'
-      retailer2.offerImageFrontUrl = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/5f91759fea990_template_image_1603368351.webp' 
-      this.favouriteRetailers.offers?.push(retailer2)
-      this.favouriteRetailers.offers?.push(retailer2)
     })
   }
+
+  favoriteDescription(favorite:retailerObj){
+    let favDescription = ''
+    if(favorite.promotionType == '1'){//stamp
+      let rewardStamps = Number(favorite.userRewardCount)
+      let redeemStamps = Number(favorite.redeemStamps)
+      if(rewardStamps == 0){
+        favDescription = "Buy " + rewardStamps + " get 1 Free"
+      }else{
+        if(rewardStamps > redeemStamps){
+          favDescription = "Redeem Reward"
+        }else{
+          favDescription = 'You have earned ' + rewardStamps + " stamp. Buy " + (redeemStamps - rewardStamps) + " more time"
+        }
+        favDescription = "Buy " + rewardStamps + " get 1 Free"
+      }
+    }else if(favorite.promotionType == '2'){//points
+      favDescription = "You have earned " + Number(favorite.userRewardCount) + " points"
+    }else if(favorite.promotionType = '3'){//cashback
+      favDescription = "You have earned $" + favorite.userRewardCount + " cash back"
+    }
+
+    return favDescription
+}
 
   /*ACTIONS*/
   searchPromotionsWithCategory(category:catObj){

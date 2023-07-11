@@ -1,7 +1,17 @@
 import { promotionObj } from "./promotion.model"
 
 export class Products {
-	productsList : productObj[] = []
+
+	returnMessage? : string 
+	statusCode? : 0
+	returnData? : [productObj]
+}
+
+export class ProductsDetail {
+
+	returnMessage? : string 
+	statusCode? : 0
+	returnData? : productObj
 }
 
 
@@ -11,6 +21,7 @@ export class productObj {
 	categoryName?: String
 	categoryParentId?: number
 	descriptionField?: String
+	description?: String
 	dicountedPrice?: String
 	displayPrice?: String
 	favourite?: String
@@ -25,7 +36,7 @@ export class productObj {
 	isGiftCardSelectForSwap?: Boolean = false
 	promotion?: promotionObj
 	productModelId?: number = 0
-	attributes?  : Attributes[] = []
+	attributes?  :  [Attributes]
 	images : string[] = []
 	variations = []
 	appliedVariation = {}

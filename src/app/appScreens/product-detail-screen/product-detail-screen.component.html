@@ -6,7 +6,7 @@
 				(slide)="onSlide($event)">
 				<ng-template ngbSlide *ngFor="let img of product?.images; index as i">
 					<div class="picsum-img-wrapper">
-						<img [src]="img" alt="Product image {{i + 1}} description" width="100%" height="70%" />
+						<img [src]="this.constants.imgBaseUrl+img" alt="Product image {{i + 1}} description" width="100%" height="70%" />
 					</div>
 				</ng-template>
 			</ngb-carousel>
@@ -14,19 +14,28 @@
 		<div class="col-12 col-lg-6">
 			<h2 class="card-title">{{product?.productName}}</h2>
 			<p class="card-text">
-				{{product?.descriptionField}}
+				{{product?.description}}
 			</p>
-			<div class="priceing">
-				<div class="actualPrice">$10.10</div>
-				<div class="seprator"></div>
-				<div class="discountPrice">$5.00</div>
-				<div class="percentage">
-					50%</div>
-			</div>
+			<ng-container *ngIf="product?.dicountedPrice != '0.00' ; then discount; else withoutdiscount">
+			</ng-container>
+			<ng-template #discount>
+				<div class="priceing">
+					<div class="actualPrice">${{product?.displayPrice}}</div>
+					<div class="seprator"></div>
+					<div class="discountPrice">${{product?.dicountedPrice}}</div>
+					<div class="percentage">
+						%{{this.constants.calculatePercentage(product!)}}</div>
+				</div>
+			</ng-template>
+			<ng-template #withoutdiscount>
+				<div class="priceing">
+					<div>${{product?.displayPrice}}</div>
+				</div>
+			</ng-template>
 			<div class="quantity">
-				<button class="btn-qty" (click)="btn_subtractQty_Action()">-</button>
+				<button class="btn-qty" (click)="this.constants.btn_subtractQty_Action(product!)">-</button>
 				<p class="txt-qty">{{product?.offerQuantity}}</p>
-				<button class="btn-qty" (click)="btn_addQty_Action()">+</button>
+				<button class="btn-qty" (click)="this.constants.btn_addQty_Action(product!)">+</button>
 			</div>
 		</div>
 	</div>
@@ -35,10 +44,10 @@
 	<div style="padding-bottom: 50px;">
 		<div class="attributes" *ngFor="let attrib of product?.attributes;">
 			<h2 class="attributeName">{{attrib.name}}:</h2>
-			<div class="attributes-section" >
+			<div class="attributes-section">
 				<div class="attributeVal" *ngFor="let attrVal of attrib.values;"> {{attrVal}} </div>
 			</div>
 		</div>
 	</div>
-	
+
 </div>

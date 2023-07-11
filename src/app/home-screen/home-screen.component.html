@@ -7,7 +7,14 @@
 	</div>
 
 	<h4>Recommended Promotions</h4>
-	<div class="promotions">
+	<div class="row" *ngIf="!recommendedPromotions?.returnData?.length">
+		
+		<div class="col" style="width: 100%; height: 200px; text-align: center; padding-top: 90px;">
+			Emily can’t find retailers nearby because you appear to be too far away. You can still use the search function to find offers available.
+		</div>
+		
+	</div>
+	<div class="promotions" *ngIf="recommendedPromotions?.returnData?.length">
 		<div class="promotionCard" *ngFor="let promotion of recommendedPromotions?.returnData"  (click)="openProductAndList(promotion)">
 			<img class="cardImage" [src]="promotion.promotionCustomCard">
 			<div class="cardDetail" style="text-align: center;">
@@ -17,12 +24,17 @@
 	</div>
 
 	<h4>Favourite Retailer</h4>
-	<div class="favRetailers">
+	<div *ngIf="!favouriteRetailers?.offers?.length">
+		<div style="width: 100%; height: 200px; text-align: center; padding-top: 100px; ">
+			No favorite retailer found.
+		</div>
+	</div>
+	<div class="favRetailers" *ngIf="favouriteRetailers?.offers?.length">
 		<div class="promotionCard" *ngFor="let retailer of favouriteRetailers?.offers" (click)="openRetailerPromotionList(retailer)">
 			<img class="cardImage"  [src]="retailer.offerImageFrontUrl">
 			<div class="cardDetail">
 				<h5 style="color: white; margin: 0px; font-weight: bold;"> {{retailer.partnerName}}</h5>
-				{{retailer.partnerDescription}}
+				{{favoriteDescription(retailer)}}
 			</div>
 		</div>
 		

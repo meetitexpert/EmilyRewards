@@ -2,46 +2,57 @@
 	<!-- Retailer Information -->
 	<div class="row" style="text-align: center; justify-content:center;">
 		<h1>Munday Body Care</h1>
-		<div class="address"> Unit H5, 1070 Major Mackenzie Drive East, Richmond Hill</div>
-		<div class="distance"> 11245.00km away</div>
+		<div class="address"> {{promotion?.address}}</div>
+		<div class="distance"> {{promotion?.distance}} away</div>
 		<div class="storeTime"> Store opens on Thursday at 5:00 AM</div>
-		<div class="storeopenclose" style="width: 200px; background-color: red; border-radius: 20px; text-align: center; color: white;">Store is closed</div>
+		<div class="storeopenclose">Store is closed</div>
 	</div>
 	<!-- Products Listing -->
 	<div class="row">
 		<div class="col-6 col-md-6 col-lg-3" style="padding-bottom: 25px;" *ngFor="let product of productsList">
 			<div class="card h-100" style="align-items: center;">
-				<img src={{product.images[0]}} class="card-img-top" style="width: 100px; height: 100px; margin: 30px;" />
+				<img src={{product.logoUrl}} class="card-img-top" style="width: 100px; height: 100px; margin: 30px;" />
 				<div class="card-body">
 					<h6 class="card-title">{{product.productName}}</h6>
 					<p class="card-text">
-						{{product.descriptionField}}
+						{{product.description}}
 					</p>
 					<button (click)="btn_show_more(product)">
 						Show more
 					</button>
-					<div class="priceing">
-						<div class="actualPrice">$10.10</div>
-						<div class="seprator"></div>
-						<div class="discountPrice">$5.00</div>
-						<div class="percentage">
-							50%</div>
-					</div>
+					<ng-container *ngIf="product.dicountedPrice != '0.00' ; then discount; else withoutdiscount">
+					</ng-container>
+					<ng-template #discount>
+						<div class="priceing">
+							<div class="actualPrice">${{product.displayPrice}}</div>
+							<div class="seprator"></div>
+							<div class="discountPrice">${{product.dicountedPrice}}</div>
+							<div class="percentage">
+								%{{this.constatns.calculatePercentage(product)}}</div>
+						</div>
+					</ng-template>
+					<ng-template #withoutdiscount>
+						<div class="priceing">
+							<div>${{product.displayPrice}}</div>
+						</div>
+					</ng-template>
+
 					<div class="quantity">
-						<button class="btn-qty" (click)="btn_subtractQty_Action(product)">-</button>
+						<button class="btn-qty" (click)="this.constatns.btn_subtractQty_Action(product)">-</button>
 						<p class="txt-qty">{{product.offerQuantity}}</p>
-						<button class="btn-qty" (click)="btn_addQty_Action(product)">+</button>
+						<button class="btn-qty" (click)="this.constatns.btn_addQty_Action(product)">+</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div ngbAccordion [closeOthers]="true" style="padding-bottom: 10px;">
-		<div ngbAccordionItem *ngFor="let title of promotionDetailTitlesArray; let i = index"  style="border: 0px;">
+		<div ngbAccordionItem *ngFor="let title of promotionDetailTitlesArray; let i = index" style="border: 0px;">
 			<div ngbAccordion #accordion="ngbAccordion">
 				<div ngbAccordionItem="first" style="border: 0px; background-color: #f4f4f4;">
 					<h2 ngbAccordionHeader>
-						<button ngbAccordionButton style="background-color: #f4f4f4; color:#1d1d1d ; font-weight: 700;">{{title}}</button>
+						<button ngbAccordionButton
+							style="background-color: #f4f4f4; color:#1d1d1d ; font-weight: 700;">{{title}}</button>
 					</h2>
 					<div ngbAccordionCollapse style="background-color: #f4f4f4;">
 						<div ngbAccordionBody>
@@ -50,8 +61,9 @@
 								officia aute, non cupidatat skateboard dolor brunch.  -->
 								{{promotionDescriptionsArray[i]}}
 								<div class="row" *ngIf="title == 'Location'">
-									<div class="col"> 
-										<button class="btn-Direction" (click)="btn_direction_Action()"> Get Direction </button>
+									<div class="col">
+										<button class="btn-Direction" (click)="btn_direction_Action()"> Get Direction
+										</button>
 									</div>
 									<div class="col">
 										<button class="btn-call" (click)="btn_call_Action()"> Call Now </button>
@@ -65,6 +77,10 @@
 		</div>
 	</div>
 	<div class="checkout">
+		<button class="btn_checkout" style="margin-bottom: 10px;" (click)="markFavorite()">{{btnfavouriteText}}</button>
+	</div>
+	<div class="checkout">
 		<button class="btn_checkout">Checkout</button>
 	</div>
+	
 </div>

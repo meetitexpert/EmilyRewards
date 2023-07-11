@@ -31,7 +31,7 @@ export class promotionObj{
     startDateEffective : number = 0
     status : string = ""
     userType : string = ""
-    favourite_status : string = ""
+    favourite : string = ""
     cashBackDiscountValue : string = ""
     offerId : string = ""
     partnerDescription : string | undefined = ""
@@ -62,7 +62,7 @@ export class promotionObj{
     street : string = ""
     city : string = ""
     postalCode : string = ""
-    locationsArray = []
+    locations = []
     userStampNumber : number = 0
     partnerRewardsTC : string = ""
     locationId : string = ""
