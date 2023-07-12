@@ -1,11 +1,11 @@
 <div class="container">
 	<!-- Retailer Information -->
-	<div class="row" style="text-align: center; justify-content:center;">
+	<div class="row" style="text-align: center; justify-content:center; margin-bottom: 50px;">
 		<h1>Munday Body Care</h1>
 		<div class="address"> {{promotion?.address}}</div>
 		<div class="distance"> {{promotion?.distance}} away</div>
-		<div class="storeTime"> Store opens on Thursday at 5:00 AM</div>
-		<div class="storeopenclose">Store is closed</div>
+		<div class="storeTime"> {{storeOpensAt}}</div>
+		<div class="storeopenclose" *ngIf="storeIsClosed">Store is closed</div>
 	</div>
 	<!-- Products Listing -->
 	<div class="row">

@@ -1,5 +1,6 @@
 import { Attribute, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import moment from 'moment-timezone';
 import { AppConstants } from 'src/app/Constants/app.constants';
 import { MarkFavourite } from 'src/app/models/mark-favourite.model';
 import { Attributes, Products, productObj } from 'src/app/models/products.model';
@@ -20,36 +21,22 @@ export class ProductListScreenComponent {
   promotionDetailTitlesArray = ["Promotion Description", "Promotion Terms & Conditions", "Rewards Terms & Conditions", "Redeem Terms & Conditions", "Gift Cards Terms & Conditions", "Location"]
   promotionDescriptionsArray: Array<String> = []
   user?: SingIn //user Object
-  qtyCount: number = 0
+  storeIsClosed: boolean = false
+  storeOpensAt = ''
+  nextDayCount = 0
   btnfavouriteText = ''
+
 
   constructor(private activeRouter: ActivatedRoute, private apiService: ApisService, public constatns: AppConstants, private router: Router) {
     this.user = JSON.parse(sessionStorage.getItem(this.constatns.userObject) ?? "")
     this.promotion = JSON.parse(activeRouter.snapshot.params['promotion']) as promotionObj
     this.favouriteBtnTextSetting()
-    // let product = new productObj()
-    // product.productName = 'Product 1'
-    // product.descriptionField = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    // product.images = ['https://m.media-amazon.com/images/G/31/img17/Home/LA/naireshm_LA/image_23a._SY900_QL85_FMpng_.png','https://images.unsplash.com/photo-1612817288484-6f916006741a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXR5JTIwcHJvZHVjdHN8ZW58MHx8MHx8fDA%3D&w=1000&q=80','https://media.istockphoto.com/id/1370669395/photo/different-hair-care-products-on-wooden-table.webp?b=1&s=170667a&w=0&k=20&c=-VKPETob_3F361SvnatkwIYWjipBZKloBtgm1jsKmf4=']
-    // product.offerQuantity = 0
-
-    // let atrb = new Attributes()
-    // atrb.name = 'Colors'
-    // atrb.values = ['Black','Brown','Red','Orrange','Pink','Black','Brown','Red','Orrange','Pink','Black','Brown','Red','Orrange','Pink','Black','Brown','Red','Orrange','Pink']
-
-    // let atrb2 = new Attributes()
-    // atrb2.name = 'Sizes'
-    // atrb2.values = ['Small','Medium','Large','X Large','XX Large','XXX Large']
-
-    // product.attributes = [atrb, atrb2]
-
-    // let productArray = [product, product, product, product, product, product, product, product]
-    // this.productsList = productArray
-
 
     this.promotion.address = this.promotion?.locations[0]["address"] ?? "";
     this.promotion.distance = this.promotion?.locations[0]["distance"] ?? "";
     this.promotionDescriptionsArray.push(this.promotion?.longDescription ?? "N/A", this.promotion?.promotionRewardsTC ?? "N/A", this.promotion?.promotionRedeemTC ?? "N/A", this.promotion?.promotionRestrictionTC ?? "N/A", "N/A", this.promotion.address ?? "N/A")
+
+    this.storeOpenCloseTimeSetting()
 
   }
 
@@ -97,7 +84,6 @@ export class ProductListScreenComponent {
           if (cartProducts.length > 0) {
             productQuantityInCart = cartProducts[0].offerQuantity
           }
-
         }
 
         item.offerQuantity = productQuantityInCart
@@ -139,6 +125,256 @@ export class ProductListScreenComponent {
         this.favouriteBtnTextSetting()
       }
     })
+  }
+
+  public isStoreNotOpenYet(openTime: string, closeTime: string, timezone: string) {
+
+    // get the current date and time in the given time zone
+    const now = moment.tz(timezone);
+
+    // Get the exact open and close times on that date in the given time zone
+    // See https://github.com/moment/moment-timezone/issues/119
+    const date = now.format("YYYY-MM-DD");
+    const storeOpenTime = moment.tz(date + ' ' + openTime, "YYYY-MM-DD h:mmA", timezone);
+    const storeCloseTime = moment.tz(date + ' ' + closeTime, "YYYY-MM-DD h:mmA", timezone);
+
+    let check = now.isBefore(storeOpenTime);
+
+    return check;
+  }
+
+  public isStoreOpenNow(openTime: string, closeTime: string, timezone: string) {
+
+    // handle special case
+    if (openTime === "24HR") {
+      return "open";
+    }
+
+    // get the current date and time in the given time zone
+    const now = moment.tz(timezone);
+
+    // Get the exact open and close times on that date in the given time zone
+    // See https://github.com/moment/moment-timezone/issues/119
+    const date = now.format("YYYY-MM-DD");
+    const storeOpenTime = moment.tz(date + ' ' + openTime, "YYYY-MM-DD h:mmA", timezone);
+    const storeCloseTime = moment.tz(date + ' ' + closeTime, "YYYY-MM-DD h:mmA", timezone);
+
+    let check;
+
+    // Normal range check using an inclusive start time and exclusive end time
+    check = now.isBetween(storeOpenTime, storeCloseTime, null, '[)');
+
+    return check;
+  }
+
+  public isStoreCloseNow(openTime: string, closeTime: string, timezone: string) {
+
+    // get the current date and time in the given time zone
+    const now = moment.tz(timezone);
+
+    // Get the exact open and close times on that date in the given time zone
+    // See https://github.com/moment/moment-timezone/issues/119
+    const date = now.format("YYYY-MM-DD");
+    const storeOpenTime = moment.tz(date + ' ' + openTime, "YYYY-MM-DD h:mmA", timezone);
+    const storeCloseTime = moment.tz(date + ' ' + closeTime, "YYYY-MM-DD h:mmA", timezone);
+
+    let check = now.isAfter(storeCloseTime);
+
+    return check;
+  }
+
+  storeOpenCloseTimeSetting() {
+    let curretStatus = ''
+    let currentDay = new Date().toLocaleDateString('en-us', { weekday: "long" });
+    console.log(currentDay)
+
+    // get the current date and time in the given time zone
+    const now = moment.tz('America/Canada');
+
+    switch (currentDay) {
+      case "Sunday":
+        if (this.promotion?.locations[0]["sunOpenStatus"] == '1') {
+          if (this.isStoreNotOpenYet(this.promotion?.locations[0]["sunStartTime"], this.promotion?.locations[0]["sunEndTime"], 'America/Canada')) {
+            this.storeOpensAt = 'Store opens at ' + this.constatns.getTimeInRequiredFormate(this.promotion?.locations[0]["sunStartTime"])
+            this.storeIsClosed = true
+          } else if (this.isStoreOpenNow(this.promotion?.locations[0]["sunStartTime"], this.promotion?.locations[0]["sunEndTime"], 'America/Canada')) {
+            this.storeIsClosed = false
+          } else if (this.isStoreCloseNow(this.promotion?.locations[0]["sunStartTime"], this.promotion?.locations[0]["sunEndTime"], 'America/Canada')) {
+            this.nextDayTime(this.nextDay(new Date()))
+          }
+        } else {
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break;
+
+      case "Monday":
+        if (this.promotion?.locations[0]["monOpenStatus"] == '1') {
+          if (this.isStoreNotOpenYet(this.promotion?.locations[0]["monStartTime"], this.promotion?.locations[0]["monEndTime"], 'America/Canada')) {
+            this.storeOpensAt = 'Store opens at ' + this.constatns.getTimeInRequiredFormate(this.promotion?.locations[0]["monStartTime"])
+            this.storeIsClosed = true
+          } else if (this.isStoreOpenNow(this.promotion?.locations[0]["monStartTime"], this.promotion?.locations[0]["monEndTime"], 'America/Canada')) {
+            this.storeIsClosed = false
+          } else if (this.isStoreCloseNow(this.promotion?.locations[0]["monStartTime"], this.promotion?.locations[0]["monEndTime"], 'America/Canada')) {
+            this.nextDayTime(this.nextDay(new Date()))
+          }
+        } else {
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break;
+      case "Tuesday":
+        if (this.promotion?.locations[0]["tueOpenStatus"] == '1') {
+          if (this.isStoreNotOpenYet(this.promotion?.locations[0]["tueStartTime"], this.promotion?.locations[0]["tueEndTime"], 'America/Canada')) {
+            this.storeOpensAt = 'Store opens at ' + this.constatns.getTimeInRequiredFormate(this.promotion?.locations[0]["tueStartTime"])
+            this.storeIsClosed = true
+          } else if (this.isStoreOpenNow(this.promotion?.locations[0]["tueStartTime"], this.promotion?.locations[0]["tueEndTime"], 'America/Canada')) {
+            this.storeIsClosed = false
+          } else if (this.isStoreCloseNow(this.promotion?.locations[0]["tueStartTime"], this.promotion?.locations[0]["tueEndTime"], 'America/Canada')) {
+            this.nextDayTime(this.nextDay(new Date()))
+          }
+        } else {
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break;
+      case "Wednesday":
+        if (this.promotion?.locations[0]["wedOpenStatus"] == '1') {
+          if (this.isStoreNotOpenYet(this.promotion?.locations[0]["wedStartTime"], this.promotion?.locations[0]["wedEndTime"], 'America/Canada')) {
+            this.storeOpensAt = 'Store opens at ' + this.constatns.getTimeInRequiredFormate(this.promotion?.locations[0]["wedStartTime"])
+            this.storeIsClosed = true
+          } else if (this.isStoreOpenNow(this.promotion?.locations[0]["wedStartTime"], this.promotion?.locations[0]["wedEndTime"], 'America/Canada')) {
+            this.storeIsClosed = false
+          } else if (this.isStoreCloseNow(this.promotion?.locations[0]["wedStartTime"], this.promotion?.locations[0]["wedEndTime"], 'America/Canada')) {
+            this.nextDayTime(this.nextDay(new Date()))
+          }
+        } else {
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break;
+      case "Thursday":
+        if (this.promotion?.locations[0]["thuOpenStatus"] == '1') {
+          if (this.isStoreNotOpenYet(this.promotion?.locations[0]["thuStartTime"], this.promotion?.locations[0]["thuEndTime"], 'America/Canada')) {
+            this.storeOpensAt = 'Store opens at ' + this.constatns.getTimeInRequiredFormate(this.promotion?.locations[0]["thuStartTime"])
+            this.storeIsClosed = true
+          } else if (this.isStoreOpenNow(this.promotion?.locations[0]["thuStartTime"], this.promotion?.locations[0]["thuEndTime"], 'America/Canada')) {
+            this.storeIsClosed = false
+          } else if (this.isStoreCloseNow(this.promotion?.locations[0]["thuStartTime"], this.promotion?.locations[0]["thuEndTime"], 'America/Canada')) {
+            this.nextDayTime(this.nextDay(new Date()))
+          }
+        } else {
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break;
+      case "Friday":
+        if (this.promotion?.locations[0]["friOpenStatus"] == '1') {
+          if (this.isStoreNotOpenYet(this.promotion?.locations[0]["friStartTime"], this.promotion?.locations[0]["friEndTime"], 'America/Canada')) {
+            this.storeOpensAt = 'Store opens at ' + this.constatns.getTimeInRequiredFormate(this.promotion?.locations[0]["wedStartTime"])
+            this.storeIsClosed = true
+          } else if (this.isStoreOpenNow(this.promotion?.locations[0]["friStartTime"], this.promotion?.locations[0]["friEndTime"], 'America/Canada')) {
+            this.storeIsClosed = false
+          } else if (this.isStoreCloseNow(this.promotion?.locations[0]["friStartTime"], this.promotion?.locations[0]["friEndTime"], 'America/Canada')) {
+            this.nextDayTime(this.nextDay(new Date()))
+          }
+        } else {
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break;
+      case "Saturday":
+        if (this.promotion?.locations[0]["satOpenStatus"] == '1') {
+          if (this.isStoreNotOpenYet(this.promotion?.locations[0]["satStartTime"], this.promotion?.locations[0]["satEndTime"], 'America/Canada')) {
+            this.storeOpensAt = 'Store opens at ' + this.constatns.getTimeInRequiredFormate(this.promotion?.locations[0]["satStartTime"])
+            this.storeIsClosed = true
+          } else if (this.isStoreOpenNow(this.promotion?.locations[0]["satStartTime"], this.promotion?.locations[0]["satEndTime"], 'America/Canada')) {
+            this.storeIsClosed = false
+          } else if (this.isStoreCloseNow(this.promotion?.locations[0]["satStartTime"], this.promotion?.locations[0]["satEndTime"], 'America/Canada')) {
+            this.nextDayTime(this.nextDay(new Date()))
+          }
+        } else {
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  nextDay(date: Date) {
+    this.nextDayCount += 1
+    var nextDate = date;
+    nextDate.setDate(nextDate.getDate() + this.nextDayCount);
+    let nextDay = nextDate.toLocaleDateString('en-us', { weekday: "long" });
+    console.log(nextDay)
+    return nextDay
+  }
+
+  nextDayTime(nextDay: string) {
+
+    let time = ''
+
+    switch (nextDay) {
+      case "Sunday":
+        if (this.promotion?.locations[0]["sunOpenStatus"] == '1') {
+          time = this.constatns.getTimeInRequiredFormate(this.promotion!.locations[0]["sunStartTime"])
+        } else {
+
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+
+        break
+      case "Monday":
+        if (this.promotion?.locations[0]["monOpenStatus"] == '1') {
+          time = this.constatns.getTimeInRequiredFormate(this.promotion!.locations[0]["monStartTime"])
+        } else {
+
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break
+      case "Tuesday":
+        if (this.promotion?.locations[0]["tueOpenStatus"] == '1') {
+          time = this.constatns.getTimeInRequiredFormate(this.promotion!.locations[0]["tueStartTime"])
+        } else {
+
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break
+      case "Wednesday":
+        if (this.promotion?.locations[0]["wedOpenStatus"] == '1') {
+          time = this.constatns.getTimeInRequiredFormate(this.promotion!.locations[0]["wedStartTime"])
+        } else {
+
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break
+      case "Thursday":
+        if (this.promotion?.locations[0]["thuOpenStatus"] == '1') {
+          time = this.constatns.getTimeInRequiredFormate(this.promotion!.locations[0]["thuStartTime"])
+        } else {
+
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break
+      case "Friday":
+        if (this.promotion?.locations[0]["friOpenStatus"] == '1') {
+          time = this.constatns.getTimeInRequiredFormate(this.promotion!.locations[0]["friStartTime"])
+        } else {
+
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break
+      case "Saturday":
+        if (this.promotion?.locations[0]["satOpenStatus"] == '1') {
+          time = this.constatns.getTimeInRequiredFormate(this.promotion!.locations[0]["satStartTime"])
+        } else {
+
+          this.nextDayTime(this.nextDay(new Date()))
+        }
+        break
+
+      default:
+        break
+    }
+
+    this.storeOpensAt = 'Store opens on ' + nextDay + 'at ' + time
+    this.storeIsClosed = true
+
   }
 
 

@@ -99,104 +99,13 @@ export class AppConstants {
         }
 
     }
-
-/*
-    CheckTimeWithInOperatingHours(openTime:string, closeTime:string){
-        timeExist : Boolean
-        openTimeMinuts : Number = 00
-        int closeTimeMinuts = 00;
-        
-        List<String> openTimesArray = openTime.split(':'); 
-        if (openTimesArray.length > 1) {
-            openTimeMinuts = int.parse(openTimesArray[1].toString().replaceAll(new RegExp(r'[^0-9]'),''));
-        }
-        
-        List<String> closeTimesArray = closeTime.split(':');
-        if (closeTimesArray.length > 1) {
-            closeTimeMinuts = int.parse(closeTimesArray[1].toString().replaceAll(new RegExp(r'[^0-9]'),''));
-        }
-       
-       TimeOfDay now = TimeOfDay.now(); // or DateTime object
-       TimeOfDay startTime =  TimeOfDay(hour: getexactTime(openTime), minute: openTimeMinuts);
-       TimeOfDay endTime = TimeOfDay(hour: getexactTime(closeTime), minute: closeTimeMinuts);
-
-       int shopOpenTimeInSeconds = startTime.hour * 60 + startTime.minute;
-       int shopCloseTimeInSeconds = endTime.hour * 60 + endTime.minute;
-       int timeNowInSeconds = now.hour * 60 + now.minute;
-        
-        if (shopCloseTimeInSeconds < shopOpenTimeInSeconds) {//if end time less then start time
-            if (timeNowInSeconds >= shopCloseTimeInSeconds && timeNowInSeconds <= shopOpenTimeInSeconds) {
-                timeExist = false;
-            }else{
-                timeExist = true;
-            }
-        }else if (shopOpenTimeInSeconds <= timeNowInSeconds && timeNowInSeconds <= shopCloseTimeInSeconds) {
-            print("between $openTime and $closeTime");
-            timeExist = true;
-        } else {
-            print("not between $openTime and $closeTime");
-            timeExist = false;
-        }
-        return timeExist;
-    }
     
-    static bool isOpenTimePassed(String openTime){
-        bool timeExist;
-        int openTimeMinuts = 00;
-        
-        List<String> openTimesArray = openTime.split(':'); 
-        if (openTimesArray.length > 1) {
-            openTimeMinuts = int.parse(openTimesArray[1].toString().replaceAll(new RegExp(r'[^0-9]'),''));
-        }
-        
-       TimeOfDay now = TimeOfDay.now(); // or DateTime object
-       TimeOfDay startTime =  TimeOfDay(hour: getexactTime(openTime), minute: openTimeMinuts);
-       
-       int shopOpenTimeInSeconds = startTime.hour * 60 + startTime.minute;
-       int timeNowInSeconds = now.hour * 60 + now.minute;
-        
-        if (shopOpenTimeInSeconds <= timeNowInSeconds) {
-            print("store not open yet");
-            timeExist = false;
-        } else {
-            print("store open already");
-            timeExist = true;
-        }
-        return timeExist;
-    }
-    
-    static bool isClosedTimePassed(String closeTime){
-        bool timeExist;
-        int closeTimeMinuts = 00;
-        
-         List<String> closeTimesArray = closeTime.split(':');
-        if (closeTimesArray.length > 1) {
-            closeTimeMinuts = int.parse(closeTimesArray[1].toString().replaceAll(RegExp(r'[^0-9]'),''));
-        }
-        
-       TimeOfDay now = TimeOfDay.now(); // or DateTime object
-       TimeOfDay endTime = TimeOfDay(hour: getexactTime(closeTime), minute: closeTimeMinuts);
-        
-        int shopCloseTimeInSeconds = endTime.hour * 60 + endTime.minute;
-        int timeNowInSeconds = now.hour * 60 + now.minute;
-
-        if (timeNowInSeconds <= shopCloseTimeInSeconds) {
-            print("store is not closed");
-            timeExist = false;
-        } else {
-            print("store is closed");
-            timeExist = true;
-        }
-        return timeExist;
-    }
-    
-    
-    static int getexactTime (String time) {
+    public getexactTime (time:string) {
         var currentTime = 9;
         
         switch (time) {
             case "12:00 AM": case "12:15 AM": case "12:30 AM": case "12:45 AM":
-                currentTime = 00;
+                currentTime = 0o0;
             break;
         case "01:00 AM": case "01:15 AM": case "01:30 AM": case "01:45 AM":
             currentTime = 1;
@@ -274,9 +183,9 @@ export class AppConstants {
         return currentTime;
    }
     
-   static String getTimeInRequiredFormate (String time) {
-        String currentTime = time;
-        String expression = "^0+";
+   public getTimeInRequiredFormate (time:string) {
+        let currentTime = time;
+        let expression = "^0+";
         switch (time) {
         case "01:00 AM": case "01:15 AM": case "01:30 AM": case "01:45 AM":
             currentTime = time.replaceAll(expression, "");
@@ -337,6 +246,6 @@ export class AppConstants {
             break;
         }
         return currentTime;
-   }*/
+   }
 }
 
