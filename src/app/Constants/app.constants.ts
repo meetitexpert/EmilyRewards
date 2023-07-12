@@ -45,6 +45,7 @@ export class AppConstants {
     public getProducstsList = 'getProductList.mvc'
     public getProductDetail = 'getProduct.mvc'
     public markFavourite = 'MembershipFavourites'
+    public getRetailerSettings = 'GetRetailerSettings.mvc'
 
     ////////////Colors////////
     public primaryColor = 0xFF02b4ec;
@@ -99,7 +100,7 @@ export class AppConstants {
         }
 
     }
-    
+
     public getexactTime (time:string) {
         var currentTime = 9;
         

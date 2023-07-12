@@ -97,6 +97,10 @@ export class ProductListScreenComponent {
     this.router.navigate(['product-detail', { selectedProduct: JSON.stringify(product) }])
   }
 
+  btn_checkOut_Action(){
+    this.router.navigate(['checkout'])
+  }
+
   btn_direction_Action() {
     var p = this.constatns.latitude + "," + this.constatns.longitude;
     var d = 'destination';
@@ -376,6 +380,5 @@ export class ProductListScreenComponent {
     this.storeIsClosed = true
 
   }
-
 
 }

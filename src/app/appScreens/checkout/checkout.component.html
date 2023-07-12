@@ -1,0 +1,65 @@
+<div class="container">
+	<h1>Checkout</h1>
+	<div class="row" style="background-color: #f4f4f4; border-radius: 5px; margin-bottom: 10px; padding: 10px;" *ngFor="let product of productslist">
+		<div class="col-sm-2 col-lg-2">
+			<img class="order-image" [src]="product.logoUrl" style="width: 50%; height: 50%; margin: 30px;">
+		</div>
+		<div class="col-sm-6 col-lg-8">
+			<h2 class="card-title">{{product?.productName}}</h2>
+			<p class="card-text">
+				{{product?.description}}
+			</p>
+			<ng-container *ngIf="product?.dicountedPrice != '0.00' ; then discount; else withoutdiscount">
+			</ng-container>
+			<ng-template #discount>
+				<div class="priceing">
+					<div class="actualPrice">${{product?.displayPrice}}</div>
+					<div class="seprator"></div>
+					<div class="discountPrice">${{product?.dicountedPrice}}</div>
+					<div class="percentage">
+						%{{this.constants.calculatePercentage(product!)}}</div>
+				</div>
+			</ng-template>
+			<ng-template #withoutdiscount>
+				<div class="priceing">
+					<div>${{product?.displayPrice}}</div>
+				</div>
+			</ng-template>
+			<div class="quantity">
+				<button class="btn-qty" (click)="this.constants.btn_subtractQty_Action(product!)">-</button>
+				<p class="txt-qty">{{product?.offerQuantity}}</p>
+				<button class="btn-qty" (click)="this.constants.btn_addQty_Action(product!)">+</button>
+			</div>
+		</div>
+		<div class="col-2">
+			<p class="txt-qty" style="height: 100%; padding-top: 60px;">${{calculateProductTotal(product).toFixed(2)}}</p>
+		</div>
+	</div>
+	<div class="redeem">
+
+	</div>
+	<div class="gratuity">
+		
+	</div>
+	<div class="cashPayment">
+
+	</div>
+	<div class="coupon">
+		
+	</div>
+	<div class="coupon">
+		
+	</div>
+	<div class="multiListCoupon">
+		
+	</div>
+	<div class="storeCoupon">
+
+	</div>
+	<div class="giftCards">
+
+	</div>
+	<div class="address">
+		
+	</div>
+</div>

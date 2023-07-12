@@ -16,6 +16,7 @@ import { JournalComponent } from './appScreens/more-screen/more-sections/journal
 import { ContactUsComponent } from './appScreens/more-screen/more-sections/contact-us/contact-us.component';
 import { OrderDetailComponent } from './appScreens/more-screen/more-sections/order-detail/order-detail.component';
 import { ProductDetailScreenComponent } from './appScreens/product-detail-screen/product-detail-screen.component';
+import { CheckoutComponent } from './appScreens/checkout/checkout.component';
 
 
 const routes: Routes = [
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path:'promotions-list',
     component:PromotionsListComponent
+  },
+  {
+    path:'checkout',
+    component:CheckoutComponent
   },
   {
     path:'more-screen/journal-list',
