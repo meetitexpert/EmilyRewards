@@ -1,6 +1,7 @@
 <div class="container">
 	<h1>Checkout</h1>
-	<div class="row" style="background-color: #f4f4f4; border-radius: 5px; margin-bottom: 10px; padding: 10px;" *ngFor="let product of productslist">
+	<div class="row" style="background-color: #f4f4f4; border-radius: 5px; margin-bottom: 10px; padding: 10px;"
+		*ngFor="let product of productslist">
 		<div class="col-sm-2 col-lg-2">
 			<img class="order-image" [src]="product.logoUrl" style="width: 50%; height: 50%; margin: 30px;">
 		</div>
@@ -32,34 +33,61 @@
 			</div>
 		</div>
 		<div class="col-2">
-			<p class="txt-qty" style="height: 100%; padding-top: 60px;">${{calculateProductTotal(product).toFixed(2)}}</p>
+			<p class="txt-qty" style="height: 100%; padding-top: 60px;">${{calculateProductTotal(product).toFixed(2)}}
+			</p>
 		</div>
 	</div>
-	<div class="redeem">
+	<div #redeem class="opion" *ngIf="isRedeemAvailable()">
+		<div class="col-10" style="display: flex;">
+			<img class="icon" src="assets/images/android.png" width="50" height="40"/>
+			<p style="padding-top: 13px;">{{redeemLableTextSetting()}}</p>
+		</div>
+		<div class="col-2" style="text-align: right">
+			<button class="redeemButton">Redeem</button>
+		</div>
+	</div>
+	<div #gratuity class="opion" *ngIf="isGratuityEnabled()"> 
+		
+	</div>
+	<div #cashDiscount class="opion" *ngIf="isCashDiscountAvailable()">
+		<div class="col-10" style="text-align: left; display: flex;">
+			<img class="icon" src="assets/images/android.png" width="50" height="40"/>
+			<p style="padding-top: 13px;">Cash discount</p>
+		</div>
+		<div class="col-2" style="text-align: right">
+			<button class="redeemButton">Apply</button>
+		</div>
+	</div>
+	<div #coupon>
+		<div class="opion" *ngIf="promotion?.couponCode" style="display: flex;">
+			<div class="col-10" style="text-align: left">
+				<img class="icon" src="assets/images/android.png" width="50" height="40"/>
+				<p style="padding-top: 13px;">$30 coupon discount applied</p>
+			</div>
+		</div>
+		<div class="opion" *ngIf="!promotion?.couponCode" style="display: flex;">
+			<div class="col-10" style="text-align: left;">
+				<img class="icon" style="padding-bottom: 10px;" src="assets/images/android.png" width="50" height="40"/>
+				<input style="margin-top: 13px; width: 200px;" (keyup)="onKey($event)">
+			</div>
+			<div class="col-2" style="text-align: right;">
+				<button class="redeemButton">Apply</button>
+			</div>
+		</div>
+	</div>
+	<div #giftCards class="opion">
 
 	</div>
-	<div class="gratuity">
-		
-	</div>
-	<div class="cashPayment">
+	<div  class="opion">
 
 	</div>
-	<div class="coupon">
-		
-	</div>
-	<div class="coupon">
-		
-	</div>
-	<div class="multiListCoupon">
-		
-	</div>
-	<div class="storeCoupon">
+	<div class="opion">
 
 	</div>
-	<div class="giftCards">
+	<div class="opion">
 
 	</div>
-	<div class="address">
-		
+	<div class="opion">
+
 	</div>
 </div>

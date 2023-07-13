@@ -4,10 +4,10 @@ export class RetailerSettings {
 	statusCode?: 0
 
 	//gratuity settings 
-	gratuity? : {}
-	standardShippingCost? : {}
-	freeShippingCost? : {}
-	cashDiscount? : {}
-	payMethods? : {}
+	gratuity? = {name:'', value:''}
+	standardShippingCost? = {name:'', value:''}
+	freeShippingCost? = {name:'', value:''}
+	cashDiscount? = {name:'', value:''}
+	payMethods? = {name:'', value:''}
 
 }
