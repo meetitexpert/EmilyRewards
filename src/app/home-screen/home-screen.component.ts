@@ -44,7 +44,7 @@ export class HomeScreenComponent {
     this.recommendedPromotions.returnData = promotionsArray as [promotionObj]
 
     this.getCategories()
-    // this.getRecommendedrecommendedPromotions()
+    this.getRecommendedrecommendedPromotions()
     this.getFavouriteRetailer()
   }
 
