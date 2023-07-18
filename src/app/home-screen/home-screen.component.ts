@@ -85,8 +85,8 @@ export class HomeScreenComponent {
       "showAllLocations":"1"
     }))
     this.apiService.post(this.constatns.getRecommentedPromotions,params).subscribe((response)=>{
-      console.warn(JSON.stringify(response))
-
+      console.warn(JSON.stringify(response))      
+      this.recommendedPromotions = response as Promotion
     })
   }
 

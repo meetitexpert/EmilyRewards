@@ -23,7 +23,10 @@ export class CheckoutComponent {
   creditAppleidTime = 1
 
   storeCouponValue = '';
-  
+
+  appliedGiftsArray = []  
+  orderTypeDeliveryOrPickup = 'pickup'
+
   constructor(public constants:AppConstants, private apiService:ApisService){
     this.productslist = constants.shoppingCartItems
     this.promotion = this.productslist[0].promotion
@@ -125,6 +128,10 @@ export class CheckoutComponent {
   onKeyAddressfield(event: any) { // without type info
     this.storeCouponValue += event.target.value;
     console.warn(this.storeCouponValue) 
+  }
+
+  orderTypeSetting(type:string){
+    this.orderTypeDeliveryOrPickup = type
   }
 
 }

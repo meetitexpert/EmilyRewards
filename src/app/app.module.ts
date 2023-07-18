@@ -63,7 +63,7 @@ import { CheckoutComponent } from './appScreens/checkout/checkout.component'
     }),
     QRCodeModule,
     NgbModule,
-    NgbCarouselModule
+    NgbCarouselModule,
 
   ],
   providers: [],
