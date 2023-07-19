@@ -18,18 +18,29 @@ export class CheckoutComponent {
   productslist? : [productObj]
   retailerSettings? : RetailerSettings
   
+  totalBeforeTax = 0
   //credits handling
   redeemTotalCashPointStampVal = 0
   creditAppleidTime = 1
+  redeemEnable : boolean = false
 
+  //cashApply varibale
+  isCashApplied = false
+
+  //store coupon variabel
   storeCouponValue = '';
 
+  //gits variable
   appliedGiftsArray = []  
+  
+  //Order type variable
   orderTypeDeliveryOrPickup = 'pickup'
+
 
   constructor(public constants:AppConstants, private apiService:ApisService){
     this.productslist = constants.shoppingCartItems
     this.promotion = this.productslist[0].promotion
+    this.calculateTotalBeforeTax()
     this.user = JSON.parse(sessionStorage.getItem(constants.userObject) ?? "") as SingIn
   }
 
@@ -47,11 +58,22 @@ export class CheckoutComponent {
     return productTotalprice
   }
 
+  calculateTotalBeforeTax(){
+    this.totalBeforeTax = 0
+    for (let prod of this.productslist!){
+      if(prod.dicountedPrice != "0.00"){
+        this.totalBeforeTax = this.totalBeforeTax + (prod.offerQuantity * Number(prod.dicountedPrice))
+      }else{
+        this.totalBeforeTax = this.totalBeforeTax + (prod.offerQuantity * Number(prod.displayPrice))
+      }
+    }
+  }
+
   getRetailerDetail(){
     let params = new Map(Object.entries({
       "type":"M",
       "userId":this.user?.user_id?.toString(),
-      "retailerId":this.promotion?.partnerId,
+      "retailerId":this.promotion?.partnerId ?? this.promotion?.retailerId,
       "version":"1",
       "clientClass":"2"
     }))
@@ -65,14 +87,38 @@ export class CheckoutComponent {
       this.retailerSettings.payMethods = this.retailerSettings.returnData!['settings'].filter((item) =>item['name']=='payMethods')[0];
     })
   }
+
+  //QUANTITY HANDLING
+  addQtyHandling(prod:productObj, isAdd:boolean){
+    if(isAdd){
+      this.constants.btn_addQty_Action(prod)
+    }else{
+      this.constants.btn_subtractQty_Action(prod)
+    }
+    this.calculateProductTotal(prod)
+    this.calculateTotalBeforeTax()
+    this.isRedeemEnable()
+  }
+
+
   //Redeem settings
   isRedeemAvailable(){
+    this.isRedeemEnable()
     if(Number(this.promotion?.userRewardCount)>0){
       return true
     }else{
       return false
     }
   }
+
+  isRedeemEnable(){
+    if(Number(this.promotion?.redeemValue) <= this.totalBeforeTax){
+      this.redeemEnable = true
+    }else{
+      this.redeemEnable = false
+    } 
+  }
+
   redeemLableTextSetting(){
     let redeemLableText= ''
     if(this.promotion?.promotionType == '1'){//stamps
@@ -100,8 +146,12 @@ export class CheckoutComponent {
     return redeemLableText
   }
 
+  btn_redeem_action(){
+    
+  }
+
   //Gratuity Settings
-  isGratuityEnabled(){
+  isGratuityAvaialble(){
     if(this.retailerSettings?.gratuity?.value == '1'){
       return true
     }
@@ -119,19 +169,28 @@ export class CheckoutComponent {
     return false
   }
 
-  //couponhandling
-  onKeyCouponfield(event: any) { // without type info
+  btn_cashApply_Action(){
+    this.isCashApplied = !this.isCashApplied
+  }
+
+  //coupon handling
+  onKeyCouponfield(event: any) { 
     this.storeCouponValue += event.target.value;
     console.warn(this.storeCouponValue) 
   }
 
-  onKeyAddressfield(event: any) { // without type info
+  //address handling
+  onKeyAddressfield(event: any) { 
     this.storeCouponValue += event.target.value;
     console.warn(this.storeCouponValue) 
   }
 
   orderTypeSetting(type:string){
     this.orderTypeDeliveryOrPickup = type
+  }
+
+  btn_proceedCheckOut_Action(){
+
   }
 
 }

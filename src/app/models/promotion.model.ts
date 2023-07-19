@@ -36,6 +36,7 @@ export class promotionObj{
     offerId : string = ""
     partnerDescription : string | undefined = ""
     partnerId : string = ""
+    retailerId : string = ""
     partnerImage : string = ""
     partnerName : string = ""
     partnerWebsite : string = ""

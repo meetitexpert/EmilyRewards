@@ -110,10 +110,53 @@ h1 {
 	padding-top: 10px;
 }
 
-.redeemButton {
+.redeemButton, .cashButton {
 	margin-top: 13px;
 	border: 0px;
 	border-radius: 5px;
 	background-color: #02b4ec;
 	color: white;
+}
+
+.blue {
+    background-color: #02b4ec;
+}
+
+.red {
+    background-color: red;
+}
+
+.redeemButton:disabled{
+	margin-top: 13px;
+	border: 0px;
+	border-radius: 5px;
+	background-color: #e4e4e4;
+	color: #acacac;
+}
+
+.btn_checkout {
+	background-color: #02b4ec;
+	width: 65%;
+	height: 50px;
+	margin: 0px;
+	color: white;
+	margin-bottom: 50px;
+	font-size: 16px;
+	font-weight: 700;
+	border: 0px;
+	border-radius: 5px;
+}
+
+.form-check{
+	/* @media (min-width:992px) {
+		width: 400px;
+	}
+	width: 1105px; */
+	margin-left: 10px;
+}
+
+.form-check-label{
+	text-align: start;
+    /* border: 1px solid red; */
+    width: 100%
 }

@@ -34,7 +34,7 @@ export class ProductListScreenComponent {
 
     this.promotion.address = this.promotion?.locations[0]["address"] ?? "";
     this.promotion.distance = this.promotion?.locations[0]["distance"] ?? "";
-    this.promotionDescriptionsArray.push(this.promotion?.longDescription ?? "N/A", this.promotion?.promotionRewardsTC ?? "N/A", this.promotion?.promotionRedeemTC ?? "N/A", this.promotion?.promotionRestrictionTC ?? "N/A", "N/A", this.promotion.address ?? "N/A")
+    this.promotionDescriptionsArray.push(this.promotion?.longDescription ?? "N/A", this.promotion?.promotionRewardsTC ?? this.promotion.rewardsTC ?? "N/A", this.promotion?.promotionRedeemTC ?? this.promotion.redeemTC ?? "N/A", this.promotion?.promotionRestrictionTC ?? this.promotion.restrictionTC ?? "N/A", "N/A", this.promotion.address ?? "N/A")
 
     this.storeOpenCloseTimeSetting()
 

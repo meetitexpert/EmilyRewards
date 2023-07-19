@@ -27,9 +27,9 @@
 				</div>
 			</ng-template>
 			<div class="quantity">
-				<button class="btn-qty" (click)="this.constants.btn_subtractQty_Action(product!)">-</button>
+				<button class="btn-qty" (click)="addQtyHandling(product!, false)">-</button>
 				<p class="txt-qty">{{product?.offerQuantity}}</p>
-				<button class="btn-qty" (click)="this.constants.btn_addQty_Action(product!)">+</button>
+				<button class="btn-qty" (click)="addQtyHandling(product!, true)">+</button>
 			</div>
 		</div>
 		<div class="col-sm-2 col-2">
@@ -43,11 +43,11 @@
 			<p style="padding-top: 13px;">{{redeemLableTextSetting()}}</p>
 		</div>
 		<div class="col-2" style="text-align: right">
-			<button class="redeemButton">Redeem</button>
+			<button class="redeemButton" (click)="btn_redeem_action()" [attr.disabled]="!redeemEnable ? true : null">Redeem</button>
 		</div>
 	</div>
-	<div #gratuity class="opion" *ngIf="isGratuityEnabled()"> 
-		
+	<div #gratuity class="opion" *ngIf="isGratuityAvaialble()"> 
+		<p>Gratitude:</p>
 	</div>
 	<div #cashDiscount class="opion" *ngIf="isCashDiscountAvailable()">
 		<div class="col-10" style="text-align: left; display: flex;">
@@ -55,7 +55,7 @@
 			<p style="padding-top: 13px;">Cash discount</p>
 		</div>
 		<div class="col-2" style="text-align: right">
-			<button class="redeemButton">Apply</button>
+			<button class="cashButton" (click)="btn_cashApply_Action()" [ngClass]="isCashApplied ? 'red' : 'blue'">{{isCashApplied? "Remove" : "Apply"}}</button>
 		</div>
 	</div>
 	<div #coupon>
@@ -78,7 +78,8 @@
 	<div #giftCards class="opion" *ngIf="appliedGiftsArray.length > 0">
 
 	</div>
-	<div #giftCards class="opion" style="display: table-row;">
+	<div #giftCards class="opion" style="display: columns">
+		<div>Order Type: </div>
 		<div class="form-check">
 			<input
 			  mdbRadio
@@ -113,4 +114,7 @@
 		<textarea style="width: 100%;" class="span6" rows="3" placeholder="Enter comment here" required></textarea>
 	</div>
 	
+	<div class="checkout">
+		<button class="btn_checkout" (click)="btn_proceedCheckOut_Action()">Proceed To Checkout</button>
+	</div>
 </div>

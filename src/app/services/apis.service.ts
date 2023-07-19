@@ -22,7 +22,7 @@ export class ApisService {
     let params = this.objToString(this.getParams(apiName, parameters ?? new Map<string, any>))
     return this.http.post(url, params, {
       headers: this.getHeaders(apiName),
-    }).pipe(catchError(this.handleError))
+    }).pipe(catchError(this.handleError))   
   }
 
   PostMessage(input: any) {

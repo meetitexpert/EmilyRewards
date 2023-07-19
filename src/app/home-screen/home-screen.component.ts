@@ -29,19 +29,19 @@ export class HomeScreenComponent {
 
   ngOnInit(){
 
-    this.recommendedPromotions = new Promotion()
+    // this.recommendedPromotions = new Promotion()
 
-    let promotion1 = new promotionObj()
-    promotion1.promotionCustomCard = 'https://t4.ftcdn.net/jpg/02/62/03/53/360_F_262035364_gGi8uJsPl9uljis8C6oxI0w6AM7MKDLq.jpg'
-    promotion1.shortDescription = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    // let promotion1 = new promotionObj()
+    // promotion1.promotionCustomCard = 'https://t4.ftcdn.net/jpg/02/62/03/53/360_F_262035364_gGi8uJsPl9uljis8C6oxI0w6AM7MKDLq.jpg'
+    // promotion1.shortDescription = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
 
-    let promotion2 = new promotionObj()
-    promotion2.promotionCustomCard = 'https://chriscolotti.us/wp-content/uploads/2021/02/promotional-analysis.jpg'
-    promotion2.shortDescription = 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+    // let promotion2 = new promotionObj()
+    // promotion2.promotionCustomCard = 'https://chriscolotti.us/wp-content/uploads/2021/02/promotional-analysis.jpg'
+    // promotion2.shortDescription = 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
     
-    let promotionsArray = [promotion1, promotion2]
+    // let promotionsArray = [promotion1, promotion2]
 
-    this.recommendedPromotions.returnData = promotionsArray as [promotionObj]
+    // this.recommendedPromotions.returnData = promotionsArray as [promotionObj]
 
     this.getCategories()
     this.getRecommendedrecommendedPromotions()
@@ -140,8 +140,10 @@ export class HomeScreenComponent {
     this.router.navigate(['promotions-list', {retailer:JSON.stringify(retObj)}])
   }
 
-  openProductAndList(promotion:promotionObj){
-    this.router.navigate(['product-list'])
+  openProductAndList(promo:promotionObj){
+    promo.offerId = promo.promotionId.toString()
+    
+    this.router.navigate(['product-list', {promotion:JSON.stringify(promo)}])
   }
 
 }
