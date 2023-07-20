@@ -39,39 +39,60 @@
 	</div>
 	<div #redeem class="opion" *ngIf="isRedeemAvailable()">
 		<div class="col-10" style="display: flex;">
-			<img class="icon" src="assets/images/android.png" width="50" height="40"/>
+			<img class="icon" src="assets/images/android.png" width="50" height="40" />
 			<p style="padding-top: 13px;">{{redeemLableTextSetting()}}</p>
 		</div>
 		<div class="col-2" style="text-align: right">
-			<button class="redeemButton" (click)="btn_redeem_action()" [attr.disabled]="!redeemEnable ? true : null">Redeem</button>
+			<button class="redeemButton" (click)="btn_redeem_action()"
+				[attr.disabled]="!redeemEnable ? true : null">Redeem</button>
 		</div>
 	</div>
-	<div #gratuity class="opion" *ngIf="isGratuityAvaialble()"> 
-		<p>Gratitude:</p>
+	<div class="opion" *ngIf="isGratuityAvaialble()">
+		<div style="width: 100%; text-align: left;">
+			<div style="display: flex;">
+				<label class="form-label" for="customRange1">Gratitude: </label>
+				&nbsp;&nbsp;
+				<label class="rating"
+					[ngStyle]="{ 'left': ((10 * masterRangeslider - 3) + '%') }">({{masterRangeslider}}%)</label>
+			</div>
+			<div class="wrap" style="width: 100%; text-align: left;">
+				<input name="range" type="range" class="range-slider__range" [(ngModel)]="masterRangeslider"
+					[ngStyle]="{'background': 'linear-gradient(90deg, hsl('+ (10 * masterRangeslider) +', 90%, 50%) '+ (10 * masterRangeslider) +'%, #02b4ec)'  }"
+					min="0" max="30">
+			</div>
+			<div class="row">
+				<div class="col-1">5%</div>
+				<div class="col"></div>
+				<div class="col-1" style="text-align: right;">30%</div>
+			</div>
+		</div>
 	</div>
 	<div #cashDiscount class="opion" *ngIf="isCashDiscountAvailable()">
 		<div class="col-10" style="text-align: left; display: flex;">
-			<img class="icon" src="assets/images/android.png" width="50" height="40"/>
+			<img class="icon" src="assets/images/android.png" width="50" height="40" />
 			<p style="padding-top: 13px;">Cash discount</p>
 		</div>
 		<div class="col-2" style="text-align: right">
-			<button class="cashButton" (click)="btn_cashApply_Action()" [ngClass]="isCashApplied ? 'red' : 'blue'">{{isCashApplied? "Remove" : "Apply"}}</button>
+			<button class="cashButton" (click)="btn_cashApply_Action()"
+				[ngClass]="isCashApplied ? 'red' : 'blue'">{{isCashApplied? "Remove" : "Apply"}}</button>
 		</div>
 	</div>
 	<div #coupon>
 		<div class="opion" *ngIf="promotion?.couponCode" style="display: flex;">
 			<div class="col-10" style="text-align: left">
-				<img class="icon" src="assets/images/android.png" width="50" height="40"/>
+				<img class="icon" src="assets/images/android.png" width="50" height="40" />
 				<p style="padding-top: 13px;">$30 coupon discount applied</p>
 			</div>
 		</div>
 		<div class="opion" *ngIf="!promotion?.couponCode" style="display: flex;">
 			<div class="col-10" style="text-align: left;">
-				<img class="icon" style="padding-bottom: 10px;" src="assets/images/android.png" width="50" height="40"/>
-				<input style="margin-top: 13px; width: 200px;" (keyup)="onKeyCouponfield($event)" placeholder="Enter coupon code">
+				<img class="icon" style="padding-bottom: 10px;" src="assets/images/android.png" width="50"
+					height="40" />
+				<input style="margin-top: 13px; width: 200px;" (keyup)="onKeyCouponfield($event)"
+					placeholder="Enter coupon code">
 			</div>
 			<div class="col-2" style="text-align: right;">
-				<button class="redeemButton">Apply</button>
+				<button class="redeemButton" (click)="btn_coupon_action()">Apply</button>
 			</div>
 		</div>
 	</div>
@@ -81,39 +102,26 @@
 	<div #giftCards class="opion" style="display: columns">
 		<div>Order Type: </div>
 		<div class="form-check">
-			<input
-			  mdbRadio
-			  class="form-check-input"
-			  type="radio"
-			  name="flexRadioDefault"
-			  id="flexRadioDefault1"
-			  [checked]="false"
-			  (change)="orderTypeSetting('pickup')"
-			/>
+			<input mdbRadio class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+				[checked]="false" (change)="orderTypeSetting('pickup')" />
 			<label #typeLabel class="form-check-label" for="flexRadioDefault1"> Pickup </label>
-		  </div>
+		</div>
 
-		  <!-- Default checked radio -->
-		  <div class="form-check">
-			<input
-			  mdbRadio
-			  class="form-check-input"
-			  type="radio"
-			  name="flexRadioDefault"
-			  id="flexRadioDefault2"
-			  [checked]="false"
-			  (change)="orderTypeSetting('delivery')"
-			/>
+		<!-- Default checked radio -->
+		<div class="form-check">
+			<input mdbRadio class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+				[checked]="false" (change)="orderTypeSetting('delivery')" />
 			<label #typeLabel class="form-check-label" for="flexRadioDefault2"> Delivery </label>
-		  </div>
+		</div>
 	</div>
-	<div  class="opion" *ngIf="orderTypeDeliveryOrPickup == 'delivery'" style="margin-bottom: 0px;">
-		<input style="margin-top: 13px; width: 100%;" (keyup)="onKeyCouponfield($event)" placeholder="Enter your address">
+	<div class="opion" *ngIf="orderTypeDeliveryOrPickup == 'delivery'" style="margin-bottom: 0px;">
+		<input style="margin-top: 13px; width: 100%;" (keyup)="onKeyCouponfield($event)"
+			placeholder="Enter your address">
 	</div>
-	<div  class="opion">
+	<div class="opion">
 		<textarea style="width: 100%;" class="span6" rows="3" placeholder="Enter comment here" required></textarea>
 	</div>
-	
+
 	<div class="checkout">
 		<button class="btn_checkout" (click)="btn_proceedCheckOut_Action()">Proceed To Checkout</button>
 	</div>

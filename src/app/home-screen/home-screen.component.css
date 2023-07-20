@@ -23,7 +23,7 @@ h4 {
 	/* border: 1px solid red; */
 	display: flex;
 	height: 230px;
-	overflow-x: auto;
+	overflow-x: scroll;
 	overflow-y: hidden;
 	width: 95%;
     margin: auto;

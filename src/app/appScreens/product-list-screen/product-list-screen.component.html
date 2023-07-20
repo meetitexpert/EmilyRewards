@@ -46,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-	<div ngbAccordion [closeOthers]="true" style="padding-bottom: 10px;">
+	<div ngbAccordion [closeOthers]="true" style="padding-bottom: 50px;">
 		<div ngbAccordionItem *ngFor="let title of promotionDetailTitlesArray; let i = index" style="border: 0px;">
 			<div ngbAccordion #accordion="ngbAccordion">
 				<div ngbAccordionItem="first" style="border: 0px; background-color: #f4f4f4;">
@@ -77,7 +77,7 @@
 		</div>
 	</div>
 	<div class="checkout">
-		<button class="btn_checkout" style="margin-bottom: 10px;" (click)="markFavorite()">{{btnfavouriteText}}</button>
+		<button class="btn_checkout" style="margin-bottom: 20px;" (click)="markFavorite()">{{btnfavouriteText}}</button>
 	</div>
 	<div class="checkout">
 		<button class="btn_checkout" (click)="btn_checkOut_Action()">Checkout</button>

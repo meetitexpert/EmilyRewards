@@ -5,6 +5,7 @@ import { promotionObj } from 'src/app/models/promotion.model';
 import { RetailerSettings } from 'src/app/models/retailer-settings.model';
 import { SingIn } from 'src/app/models/sing-in.model';
 import { ApisService } from 'src/app/services/apis.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-checkout',
@@ -13,16 +14,19 @@ import { ApisService } from 'src/app/services/apis.service';
 })
 export class CheckoutComponent {
 
-  promotion?:promotionObj
-  user?:SingIn
-  productslist? : [productObj]
-  retailerSettings? : RetailerSettings
-  
+  promotion?: promotionObj
+  user?: SingIn
+  productslist?: [productObj]
+  retailerSettings?: RetailerSettings
+
   totalBeforeTax = 0
   //credits handling
   redeemTotalCashPointStampVal = 0
   creditAppleidTime = 1
-  redeemEnable : boolean = false
+  redeemEnable: boolean = false
+
+  //Gratuity
+  masterRangeslider = 0;
 
   //cashApply varibale
   isCashApplied = false
@@ -31,114 +35,115 @@ export class CheckoutComponent {
   storeCouponValue = '';
 
   //gits variable
-  appliedGiftsArray = []  
-  
+  appliedGiftsArray = []
+
   //Order type variable
   orderTypeDeliveryOrPickup = 'pickup'
 
 
-  constructor(public constants:AppConstants, private apiService:ApisService){
+  constructor(public constants: AppConstants, private apiService: ApisService) {
     this.productslist = constants.shoppingCartItems
     this.promotion = this.productslist[0].promotion
     this.calculateTotalBeforeTax()
     this.user = JSON.parse(sessionStorage.getItem(constants.userObject) ?? "") as SingIn
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getRetailerDetail()
   }
 
-  calculateProductTotal(prod:productObj){
+  calculateProductTotal(prod: productObj) {
     let productTotalprice = 0
-    if(prod.dicountedPrice != "0.00"){
+    if (prod.dicountedPrice != "0.00") {
       productTotalprice = prod.offerQuantity * Number(prod.dicountedPrice)
-    }else{
+    } else {
       productTotalprice = prod.offerQuantity * Number(prod.displayPrice)
     }
     return productTotalprice
   }
 
-  calculateTotalBeforeTax(){
+  calculateTotalBeforeTax() {
     this.totalBeforeTax = 0
-    for (let prod of this.productslist!){
-      if(prod.dicountedPrice != "0.00"){
+    for (let prod of this.productslist!) {
+      if (prod.dicountedPrice != "0.00") {
         this.totalBeforeTax = this.totalBeforeTax + (prod.offerQuantity * Number(prod.dicountedPrice))
-      }else{
+      } else {
         this.totalBeforeTax = this.totalBeforeTax + (prod.offerQuantity * Number(prod.displayPrice))
       }
     }
   }
 
-  getRetailerDetail(){
+  getRetailerDetail() {
     let params = new Map(Object.entries({
-      "type":"M",
-      "userId":this.user?.user_id?.toString(),
-      "retailerId":this.promotion?.partnerId ?? this.promotion?.retailerId,
-      "version":"1",
-      "clientClass":"2"
+      "type": "M",
+      "userId": this.user?.user_id?.toString(),
+      "retailerId": this.promotion?.partnerId ?? this.promotion?.retailerId,
+      "version": "1",
+      "clientClass": "2"
     }))
-    this.apiService.post(this.constants.getRetailerSettings, params).subscribe((result)=>{
+    this.apiService.post(this.constants.getRetailerSettings, params).subscribe((result) => {
       console.warn(result)
       this.retailerSettings = result as RetailerSettings
-      this.retailerSettings.gratuity = this.retailerSettings.returnData!['settings'].filter((item) =>item['name']=='isAcceptGratuity')[0];
-      this.retailerSettings.standardShippingCost = this.retailerSettings.returnData!['settings'].filter((item) =>item['name']=='standardShippingCost')[0];
-      this.retailerSettings.freeShippingCost = this.retailerSettings.returnData!['settings'].filter((item) =>item['name']=='freeShippingAmount')[0];
-      this.retailerSettings.cashDiscount = this.retailerSettings.returnData!['settings'].filter((item) =>item['name']=='cashDiscount')[0];
-      this.retailerSettings.payMethods = this.retailerSettings.returnData!['settings'].filter((item) =>item['name']=='payMethods')[0];
+      this.retailerSettings.gratuity = this.retailerSettings.returnData!['settings'].filter((item) => item['name'] == 'isAcceptGratuity')[0];
+      this.retailerSettings.standardShippingCost = this.retailerSettings.returnData!['settings'].filter((item) => item['name'] == 'standardShippingCost')[0];
+      this.retailerSettings.freeShippingCost = this.retailerSettings.returnData!['settings'].filter((item) => item['name'] == 'freeShippingAmount')[0];
+      this.retailerSettings.cashDiscount = this.retailerSettings.returnData!['settings'].filter((item) => item['name'] == 'cashDiscount')[0];
+      this.retailerSettings.payMethods = this.retailerSettings.returnData!['settings'].filter((item) => item['name'] == 'payMethods')[0];
     })
   }
 
   //QUANTITY HANDLING
-  addQtyHandling(prod:productObj, isAdd:boolean){
-    if(isAdd){
+  addQtyHandling(prod: productObj, isAdd: boolean) {
+    if (isAdd) {
       this.constants.btn_addQty_Action(prod)
-    }else{
+    } else {
       this.constants.btn_subtractQty_Action(prod)
     }
     this.calculateProductTotal(prod)
     this.calculateTotalBeforeTax()
-    this.isRedeemEnable()
+    this.creditAppleidTime = 1 //Reseting Redeem if applied before
+    this.isRedeemEnable() //redeem enable or disable handling with QTY change
   }
 
 
   //Redeem settings
-  isRedeemAvailable(){
+  isRedeemAvailable() {
     this.isRedeemEnable()
-    if(Number(this.promotion?.userRewardCount)>0){
+    if (Number(this.promotion?.userRewardCount) > 0) {
       return true
-    }else{
+    } else {
       return false
     }
   }
 
-  isRedeemEnable(){
-    if(Number(this.promotion?.redeemValue) <= this.totalBeforeTax){
+  isRedeemEnable() {
+    if (Number(this.promotion?.redeemValue) * this.creditAppleidTime <= this.totalBeforeTax) {
       this.redeemEnable = true
-    }else{
+    } else {
       this.redeemEnable = false
-    } 
+    }
   }
 
-  redeemLableTextSetting(){
-    let redeemLableText= ''
-    if(this.promotion?.promotionType == '1'){//stamps
-      if(Number(this.promotion.userRewardCount) > Number(this.promotion.redeemStamps)){
-        redeemLableText = "You have "+ this.promotion.userRewardCount + " stamps.\nGet "+ this.promotion.redeemValue +" for " + this.promotion.redeemStamps + " stamps."
+  redeemLableTextSetting() {
+    let redeemLableText = ''
+    if (this.promotion?.promotionType == '1') {//stamps
+      if (Number(this.promotion.userRewardCount) > Number(this.promotion.redeemStamps)) {
+        redeemLableText = "You have " + (Number(this.promotion.userRewardCount) - this.redeemTotalCashPointStampVal) + " stamps.\nGet " + this.promotion.redeemValue + " for " + this.promotion.redeemStamps + " stamps."
         this.redeemTotalCashPointStampVal = Number(this.promotion.redeemStamps) * this.creditAppleidTime
       }
-    }else if(this.promotion?.promotionType == '2'){//points
-      if(Number(this.promotion.userRewardCount) > Number(this.promotion.redeemPoints)){
-        redeemLableText = "You have "+ this.promotion.userRewardCount + " points.\nGet $"+ this.promotion.redeemValue +" for " + this.promotion.redeemPoints + " points."
+    } else if (this.promotion?.promotionType == '2') {//points
+      if (Number(this.promotion.userRewardCount) > Number(this.promotion.redeemPoints)) {
+        redeemLableText = "You have " + (Number(this.promotion.userRewardCount) - this.redeemTotalCashPointStampVal) + " points.\nGet $" + this.promotion.redeemValue + " for " + this.promotion.redeemPoints + " points."
         this.redeemTotalCashPointStampVal = Number(this.promotion.redeemPoints) * this.creditAppleidTime
       }
-    }else if(this.promotion?.promotionType == '3'){//cashback
-      if(Number(this.promotion.userRewardCount) > Number(this.promotion.redeemRate)){
-        if(Number(this.promotion.redeemRate) > Number(this.promotion?.redeemValue)){
-          redeemLableText = "You have $"+ Number(this.promotion.userRewardCount).toFixed(2) + " cashback.\nGet $"+ Number(this.promotion.redeemValue).toFixed(2) + " cashback."
-        }else{
-          redeemLableText = "You have $"+ Number(this.promotion.userRewardCount).toFixed(2) + " cashback.\nGet $"+ this.promotion.redeemValue +" for " + this.promotion.redeemRate + " cashback."
+    } else if (this.promotion?.promotionType == '3') {//cashback
+      if (Number(this.promotion.userRewardCount) > Number(this.promotion.redeemRate)) {
+        if (Number(this.promotion.redeemRate) > Number(this.promotion?.redeemValue)) {
+          redeemLableText = "You have $" + (Number(this.promotion.userRewardCount) - this.redeemTotalCashPointStampVal).toFixed(2) + " cashback.\nGet $" + Number(this.promotion.redeemValue).toFixed(2) + " cashback."
+        } else {
+          redeemLableText = "You have $" + (Number(this.promotion.userRewardCount) - this.redeemTotalCashPointStampVal).toFixed(2) + " cashback.\nGet $" + this.promotion.redeemValue + " for " + this.promotion.redeemRate + " cashback."
         }
-        
+
         this.redeemTotalCashPointStampVal = Number(this.promotion.userRewardCount) * this.creditAppleidTime
       }
     }
@@ -146,50 +151,79 @@ export class CheckoutComponent {
     return redeemLableText
   }
 
-  btn_redeem_action(){
-    
+  btn_redeem_action() {
+
+    let msg = ''
+
+    if (this.creditAppleidTime == 1){
+      msg = 'Okay, apply $'+ this.promotion?.redeemValue +' credit to the order.'
+    }else{
+      msg = "You have redeemed $" +  Number(this.promotion?.redeemValue) * (this.creditAppleidTime - 1) + " credit. Do you want to apply another $" + this.promotion?.redeemValue + " credit to the order?"
+    }
+
+    Swal.fire({
+      text : msg,
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      confirmButtonColor: '#02b4ec'
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.creditAppleidTime += 1
+        this.isRedeemEnable()
+      }
+    })
   }
 
   //Gratuity Settings
-  isGratuityAvaialble(){
-    if(this.retailerSettings?.gratuity?.value == '1'){
+  isGratuityAvaialble() {
+    if (this.retailerSettings?.gratuity?.value == '1') {
       return true
     }
     return false
-  }
-  gratuitySetting(){
-
   }
 
   //cashdiscount handling 
-  isCashDiscountAvailable(){
-    if(Number(this.retailerSettings?.cashDiscount?.value) > 0){
+  isCashDiscountAvailable() {
+    if (Number(this.retailerSettings?.cashDiscount?.value) > 0) {
       return true
     }
     return false
   }
 
-  btn_cashApply_Action(){
+  btn_cashApply_Action() {
     this.isCashApplied = !this.isCashApplied
   }
 
   //coupon handling
-  onKeyCouponfield(event: any) { 
+  onKeyCouponfield(event: any) {
     this.storeCouponValue += event.target.value;
-    console.warn(this.storeCouponValue) 
+    console.warn(this.storeCouponValue)
+  }
+
+  btn_coupon_action(){
+    if(this.storeCouponValue){
+      
+    }else{
+      Swal.fire({
+        title:'',
+        cancelButtonText:"Ok",
+        showConfirmButton:false        
+      })
+    }
   }
 
   //address handling
-  onKeyAddressfield(event: any) { 
+  onKeyAddressfield(event: any) {
     this.storeCouponValue += event.target.value;
-    console.warn(this.storeCouponValue) 
+    console.warn(this.storeCouponValue)
   }
 
-  orderTypeSetting(type:string){
+  orderTypeSetting(type: string) {
     this.orderTypeDeliveryOrPickup = type
   }
 
-  btn_proceedCheckOut_Action(){
+  btn_proceedCheckOut_Action() {
 
   }
 

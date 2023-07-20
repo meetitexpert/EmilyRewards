@@ -75,6 +75,13 @@ export class ProductListScreenComponent {
       // console.warn(result)
       let prodts = result as Products
       this.productsList = prodts.returnData
+      // this.productsList?.push(this.productsList[0])
+      // this.productsList?.push(this.productsList[0])
+      // this.productsList?.push(this.productsList[0])
+      // this.productsList?.push(this.productsList[0])
+      // this.productsList?.push(this.productsList[0])
+      // this.productsList?.push(this.productsList[0])
+      // this.productsList?.push(this.productsList[0])
       this.productsList?.forEach(item => {
         let productQuantityInCart = 0
 
@@ -91,13 +98,14 @@ export class ProductListScreenComponent {
       })
     })
 
+
   }
 
   btn_show_more(product: productObj) {
     this.router.navigate(['product-detail', { selectedProduct: JSON.stringify(product) }])
   }
 
-  btn_checkOut_Action(){
+  btn_checkOut_Action() {
     this.router.navigate(['checkout'])
   }
 
